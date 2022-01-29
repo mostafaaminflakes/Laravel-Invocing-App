@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body dir="{{(App::isLocale('en') ? 'ltr' : 'rtl')}}">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -35,12 +35,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav {{(App::isLocale('en') ? 'me-auto' : 'ms-auto')}}">
                         INVOICES
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav  {{(App::isLocale('en') ? 'ms-auto' : 'me-auto')}}">
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
