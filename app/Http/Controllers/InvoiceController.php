@@ -11,6 +11,16 @@ use App\Classes\PDFInvoiceOverride;
 
 class InvoiceController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Overriding trait function
     use CurrencyFormatter {
         getAmountInWords as protected getAmountInWordsWithLocale;

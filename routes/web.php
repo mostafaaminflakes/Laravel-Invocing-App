@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [InvoiceController::class, 'MakeInvoice']);
-Route::get('/mpdf', [InvoiceController::class, 'MakeInvoice']);
+Auth::routes();
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [InvoiceController::class, 'MakeInvoice']);
+Route::get('/mpdf', [InvoiceController::class, 'MakeInvoice'])->name('download-invoice');
+Route::get('/settings', [InvoiceController::class, 'MakeInvoice'])->name('settings');
