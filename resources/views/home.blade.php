@@ -15,7 +15,6 @@
                     @endif
 
                     <!-- {{ __('You are logged in!') }} -->
-                    Welcome <strong>{{ Auth::user()->name }}</strong>
                     <p><a href="{{ route('download-invoice') }}">Download Invoice</a></p>
                 </div>
             </div>
@@ -40,11 +39,9 @@
                         </span>
                     </div>
 
-                    <div class="mt-3"><button type="button" class="btn btn-primary">New Invoice</button></div>
-
                 </div>
             </div>
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-header">{{ __('TOOLS') }}</div>
 
                 <div class="card-body">
@@ -56,14 +53,14 @@
 
                     <!-- {{ __('You are logged in!') }} -->
 
-                    <div class="input-group">
+                    <!-- <div class="input-group">
                         <input type="text" class="form-control" placeholder="{{Str::words('Search by invoice number, client name', '3', '...')}}">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
                         </span>
-                    </div>
+                    </div> -->
 
-                    <div class="mt-3"><button type="button" class="btn btn-primary">New Invoice</button></div>
+                    <div><a class="btn btn-primary" href="{{ route('create') }}">New Invoice</a></div>
 
                 </div>
             </div>

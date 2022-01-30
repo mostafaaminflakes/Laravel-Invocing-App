@@ -1,25 +1,27 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
-$primary: #61451d;
+// Font Awesome
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+$primary: #61451d;
+@import "~bootstrap/scss/bootstrap";
 
 body {
-    font-family: 'Nunito';
+    font-family: "Nunito";
     font-size: 18px;
+    font-weight: 400;
 }
+
 /* make primary button bold */
 .btn-primary {
     color: #fff;
     // font-weight: bold;
 }
-
-@import '~@fortawesome/fontawesome-free/scss/brands';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';

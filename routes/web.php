@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('create', [InvoiceController::class, 'create'])->name('create');
 // Route::get('/', [InvoiceController::class, 'MakeInvoice']);
 Route::get('/mpdf', [InvoiceController::class, 'MakeInvoice'])->name('download-invoice');
 Route::get('/settings', [InvoiceController::class, 'MakeInvoice'])->name('settings');
