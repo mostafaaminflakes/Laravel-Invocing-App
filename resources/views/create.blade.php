@@ -51,10 +51,23 @@
                         </div>
 
                         <div class="fw-bold border-bottom mt-5 mb-3">Invoice Details</div>
+                        <table class="table table-bordered" id="dynamicTable">
+                            <tr class="bg-light text-dark h6">
+                                <th>Serice Name</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="addmore[0][name]" placeholder="Service name" class="form-control" /></td>
+                                <td><input type="text" name="addmore[0][qty]" placeholder="Unit price" class="form-control" /></td>
+                                <td><input type="text" name="addmore[0][price]" placeholder="Quantity" class="form-control" /></td>
+                                <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+                            </tr>
+                        </table>
 
 
-
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <div class="input-group">
                                 <div class="mb-3">
                                     <label class="form-label" for="seller_name">Invoice Number</label>
@@ -72,7 +85,7 @@
                                     <p class="form-text"><small>Example: 2022-12-15 14:41:15</small></p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <h5 class="card-title mb-3 mt-4">Options</h5>
                         <div class="ms-4 mb-3">
                             <div class="mb-3">
@@ -105,4 +118,15 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var i = 0;
+    $("#add").click(function() {
+        ++i;
+        $("#dynamicTable").append('<tr><td><input type="text" name="addmore[' + i + '][name]" placeholder="Service name" class="form-control" /></td><td><input type="text" name="addmore[' + i + '][qty]" placeholder="Unit price" class="form-control" /></td><td><input type="text" name="addmore[' + i + '][price]" placeholder="Quantity" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+    });
+
+    $(document).on('click', '.remove-tr', function() {
+        $(this).parents('tr').remove();
+    });
+</script>
 @endsection
