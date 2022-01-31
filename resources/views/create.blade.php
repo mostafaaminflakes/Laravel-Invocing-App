@@ -63,24 +63,19 @@
                                     <input type="text" name="invoice_items[0][service_name]" placeholder="Service name" class="form-control{{ $errors->has('invoice_items.0.service_name') ? ' is-invalid' : '' }}" />
                                     <div class="text-danger fs-6"></div>
                                 </td>
-                                <td><input type="text" name="invoice_items[0][unit_price]" placeholder="Unit price" class="form-control{{ $errors->has('invoice_items.0.unit_price') ? ' is-invalid' : '' }}" />
-                                    @if ($errors->has('invoice_items.0.unit_price'))
-                                    <div class="text-danger fs-6">
-                                        {{ $errors->first('invoice_items.0.unit_price') }}
-                                    </div>
-                                    @endif
+                                <td>
+                                    <input type="text" name="invoice_items[0][unit_price]" placeholder="Unit price" class="form-control{{ $errors->has('invoice_items.0.unit_price') ? ' is-invalid' : '' }}" />
+                                    <div class="text-danger fs-6"></div>
                                 </td>
-                                <td><input type="text" name="invoice_items[0][quantity]" placeholder="Quantity" class="form-control{{ $errors->has('invoice_items.0.quantity') ? ' is-invalid' : '' }}" />
-                                    @if ($errors->has('invoice_items.0.quantity'))
-                                    <div class="text-danger fs-6">
-                                        {{ $errors->first('invoice_items.0.quantity') }}
-                                    </div>
-                                    @endif
+                                <td>
+                                    <input type="text" name="invoice_items[0][quantity]" placeholder="Quantity" class="form-control{{ $errors->has('invoice_items.0.quantity') ? ' is-invalid' : '' }}" />
+                                    <div class="text-danger fs-6"></div>
                                 </td>
                                 <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
                             </tr>
                         </table>
                         <button type="submit" class="btn btn-primary" id="submit">Create Invoice</button>
+                        <div id="spinner"></div>
                     </form>
                 </div>
             </div>
@@ -92,136 +87,46 @@
         var i = 0;
         $("#add").click(function() {
             ++i;
-            $("#dynamicTable").append('<tr><td><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="Service name" class="form-control" /></td><td><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="Unit price" class="form-control" /></td><td><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="Quantity" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+            $("#dynamicTable").append('<tr><td><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="Service name" class="form-control" /><div class="text-danger fs-6"></div></td><td><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="Unit price" class="form-control" /><div class="text-danger fs-6"></div></td><td><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="Quantity" class="form-control" /><div class="text-danger fs-6"></div></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
         });
 
         $(document).on('click', '.remove-tr', function() {
             $(this).parents('tr').remove();
         });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                //'Content-Type': 'application/x-www-form-urlencoded',
-                //'Content-Type': 'application/json'
-            }
-        });
-
         $('#submit').click(function(e) {
             e.preventDefault();
             $.ajax({
-                    method: "POST", //$(this).attr('method'),
-                    url: "{{ route('store') }}", //$(this).attr('action'),
-                    data: $('#add_invoice_items').serialize(), //$(this).serialize(),
-                    dataType: "json"
+                    method: "POST",
+                    url: "{{ route('store') }}",
+                    data: $('#add_invoice_items').serialize(),
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#submit").prop('disabled', true);
+                        $('#spinner').addClass('spinner');
+                    }
                 })
                 .done(function(data) {
-                    $('.alert-success').removeClass('hidden');
-                    $('#myModal').modal('hide');
+                    // Laravel FormRequest using AJAX returns 422 status code failed validation.
+                    // That's why we handle validation in the failed method.
                 })
                 .fail(function(data) {
-                    //alert('Good Fail');
-                    console.log(data.responseJSON);
+                    $("#submit").prop('disabled', false);
+                    $('#spinner').removeClass('spinner');
                     $.each(data.responseJSON.errors, function(key, value) {
-                        var input = '#add_invoice_items input[name=' + key + ']';
+                        if (~key.indexOf(".")) {
+                            newkey = key.split('.');
+                            key = newkey[0] + '[' + newkey[1] + '][' + newkey[2] + ']';
+                        }
+                        var input = '#add_invoice_items input[name="' + key + '"]';
                         $(input + '+div').text(value);
-                        console.log(input);
-                        //$(input).parent().addClass('is-invalud');
-                        $(input).addClass(' is-invalid');
+                        $(input).addClass('is-invalid');
                     });
                 });
-
-
-
-            // $.ajax({
-            //     url: "{{ route('store') }}",
-            //     method: "POST",
-            //     data: $('#add_invoice_items').serialize(),
-            //     // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            //     headers: {
-            //         Accept: "application/json",
-            //         // "Content-Type": "text/plain; charset=utf-8"
-            //     },
-            //     dataType: 'json',
-            //     success: function(data) {
-            //         console.log(data);
-            //         if (data.errors) {
-            //             //alert('hi');
-            //             display_error_messages(data.errors);
-            //             $('#client_address_msg').html(data.errors.client_address);
-            //         } else {
-            //             i = 1;
-            //             // $('.dynamic-added').remove();
-            //             $('#add_invoice_items')[0].reset();
-            //             $(".show-success-message").find("ul").html('');
-            //             $(".show-success-message").css('display', 'block');
-            //             $(".show-error-message").css('display', 'none');
-            //             $(".show-success-message").find("ul").append('<li>Todos Has Been Successfully Inserted.</li>');
-            //         }
-            //     },
-            //     statusCode: {
-            //         500: function() {
-            //             // Server error
-            //         },
-            //         422: function(data) {
-            //             $.each(data.responseJSON, function(key, value) {
-            //                 // Set errors on inputs
-            //                 alert('Good to go');
-            //             });
-            //         }
-            //     },
-            //     error: function(data) {
-            //         alert('fail');
-            //         if (data.status === 422) {
-            //             var errors = $.parseJSON(data.responseText);
-            //             $.each(errors, function(key, value) {
-            //                 // console.log(key+ " " +value);
-            //                 $(".show-success-message").css('display', 'block');
-            //                 //$('#response').addClass("alert alert-danger");
-
-            //                 if ($.isPlainObject(value)) {
-            //                     $.each(value, function(key, value) {
-            //                         console.log(key + " " + value);
-            //                         // $('#response').show().append(value + "<br/>");
-            //                         // $(".show-success-message").find("ul").append(value);
-            //                     });
-            //                 } else {
-            //                     console.log(key + " " + value);
-            //                     // $(".show-success-message").find("ul").append(value); //this is my div with messages
-            //                 }
-            //             });
-            //         }
-            //     }
-            // });
         });
-
-        // function display_error_messages(msg) {
-        //     $(".show-error-message").find("ul").html('');
-        //     $(".show-error-message").css('display', 'block');
-        //     $(".show-success-message").css('display', 'none');
-        //     $.each(msg, function(key, value) {
-        //         $(".show-error-message").find("ul").append('<li>' + value + '</li>');
-        //     });
-        // }
     });
-
-    // document
-    //     .querySelector("form")
-    //     .addEventListener("submit", handleSubmit);
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     let myForm = document.getElementById("pizzaOrder");
-    //     let formData = new FormData(myForm);
-    //     fetch("/", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/x-www-form-urlencoded"
-    //             },
-    //             body: new URLSearchParams(formData).toString(),
-    //         })
-    //         .then(() => console.log("Form successfully submitted"))
-    //         .catch((error) => alert(error));
-    // };
 </script>
 @endsection

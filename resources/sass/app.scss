@@ -25,3 +25,33 @@ body {
     color: #fff;
     // font-weight: bold;
 }
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    position: relative;
+    width: 80px;
+    display: inline-block;
+    height: 10px;
+}
+
+.spinner:after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #61451d;
+    border-bottom-color: #61451d;
+    animation: spinner .8s ease infinite;
+}
