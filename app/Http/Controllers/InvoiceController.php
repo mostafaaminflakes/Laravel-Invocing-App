@@ -9,8 +9,8 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Traits\CurrencyFormatter;
 use App\Classes\PDFInvoiceOverride;
 use App\Http\Requests\CreateOrEditInvoiceRequest;
+use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
-use Validator;
 
 class InvoiceController extends Controller
 {
@@ -34,6 +34,19 @@ class InvoiceController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        // $invoices_mini = InvoiceModel::select('invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->get();
+        $invoices_mini = InvoiceModel::select('id', 'invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->paginate(10);
+        //$invoices_count = $invoices_mini->count();
+        return view('home', compact('invoices_mini'));
+    }
+
     public function create()
     {
         return view('create');
@@ -41,64 +54,38 @@ class InvoiceController extends Controller
 
     public function store(CreateOrEditInvoiceRequest $request)
     {
-        // $rules = [
-        //     'client_name' => 'required|string|max:255',
-        //     'client_address' => 'required|string|max:255',
-        //     'client_vat_number' => 'required|digits:15',
-        //     'invoice_items.*.service_name' => 'required|string|max:255',
-        //     //'invoice_items.*.unit_price' => ['required', 'numeric', 'regex:/^-?[0-9]+(?:.[0-9]{1,2})?$/'],
-        //     'invoice_items.*.unit_price' => 'required|numeric',
-        //     'invoice_items.*.quantity' => 'required|integer',
-        // ];
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+        $data['invoice_number'] = random_int(100000, 999999); // EFC00
+        $invoice = InvoiceModel::create($data);
 
-        // $messages = [
-        //     'client_name.required' => 'Client name is required.',
-        //     'client_address.required' => 'Client address is required.',
-        //     'client_vat_number.required' => 'VAT number is required.',
-        //     'client_vat_number.digits' => 'VAT number must be 15 digits.',
-        //     'invoice_items.*.service_name.required' => 'Service name is required.',
-        //     'invfoice_items.*.unit_price.required' => 'Unit price is required.',
-        //     'invoice_items.*.unit_price.numeric' => 'Unit price must be a number.',
-        //     'invoice_items.*.quantity.required' => 'Quantity is required.',
-        //     'invoice_items.*.quantity.integer' => 'Quantity must be a number.',
-        // ];
+        foreach ($request->invoice_items as $item) {
+            $item['invoice_id'] = $invoice->id;
+            InvoiceItems::create($item);
+        }
 
-        // $validator = Validator::make($request->all(), $rules, $messages);
+        // return redirect('home');
+        // return back()->withInput();
 
-        // if ($validator->passes()) {
-
-        //     foreach ($request->input('title') as $key => $value) {
-        //         //Todo::create(['title' => $value]);
-        //     }
-
-        //     return response()->json(['success' => 'true']);
-        // }
-
-        // return response()->json(['errors' => $validator->errors()->toArray()]);
-
-        //dd($request->all());
-        $validatedData = $request->validated();
-        //$validatedData = $request->validate($request);
-        //dd($validatedData);
-
-        // foreach ($request->invoice_items as $key => $item) {
-        //     //InvoiceItems::create($item);
-        // }
-        //$this->validate($request, $this->rules);
-
-        // $v = Validator::make($request->all(), $this->rules);
-
-        // // [
-        // //     'client_name' => 'required|string'
-        // // ]);
-
-        // if ($v->fails()) {
-        //     return response()->json(['errors' => false]);
+        return response()->json(['success' => true]);
         // }
 
         // return back()->with('success', 'Invoice Created Successfully.');
-        // return response()->json(['errors' => $request->safe()->all()]);
     }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    // public function generateUniqueCode()
+    // {
+    //     do {
+    //         $code = random_int(100000, 999999);
+    //     } while (InvoiceModel::where("invoice_number", "=", $code)->first());
+
+    //     return $code;
+    // }
 
     public function MakeInvoice()
     {

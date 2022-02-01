@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [InvoiceController::class, 'index'])->name('home');
 Route::get('create', [InvoiceController::class, 'create'])->name('create');
 Route::post('store', [InvoiceController::class, 'store'])->name('store');
 // Route::get('/', [InvoiceController::class, 'MakeInvoice']);
 Route::get('/mpdf', [InvoiceController::class, 'MakeInvoice'])->name('download-invoice');
 Route::get('/settings', [InvoiceController::class, 'MakeInvoice'])->name('settings');
 
-Route::get('add-remove-input-fields', [AddRemoveFieldController::class, 'index']);
-Route::post('add-remove-input-fields', [AddRemoveFieldController::class, 'store']);
+// Route::get('add-remove-input-fields', [AddRemoveFieldController::class, 'index']);
+// Route::post('add-remove-input-fields', [AddRemoveFieldController::class, 'store']);

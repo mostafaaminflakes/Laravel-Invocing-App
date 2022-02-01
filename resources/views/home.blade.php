@@ -4,8 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('INVOICES') }}</div>
+            <div class="">
+                <div class=" d-flex justify-content-between">
+                    <div>{{ __('NEW INVOICE') }}</div>
+                    <div class="fw-light fs-6 mt-1">Total invoices: {{ $invoices_mini->total() }}</div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,8 +17,34 @@
                     </div>
                     @endif
 
-                    <!-- {{ __('You are logged in!') }} -->
-                    <p><a href="{{ route('download-invoice') }}">Download Invoice</a></p>
+                    <!-- <p><a href="{{ route('download-invoice') }}">Download Invoice</a></p> -->
+                    <table class="table table-bordered" id="dynamicTable">
+                        <tr class="bg-light text-dark h6">
+                            <th>&nbsp;</th>
+                            <th>Invoice Number</th>
+                            <th>Client Name</th>
+                            <th>Project Name</th>
+                            <th>Date</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        @foreach ( $invoices_mini as $key => $invoice_mini )
+                        <tr>
+                            <td>{{ $invoices_mini->firstItem() + $key }}</td>
+                            <td>EFC00{{ $invoice_mini->invoice_number }}</td>
+                            <td>{{ $invoice_mini->client_name }}</td>
+                            <td>{{ $invoice_mini->project_name }}</td>
+                            <td>{{ $invoice_mini->created_at }}</td>
+                            <td><button type="button" name="details" id="details" class="btn btn-primary">Details</button></td>
+                            <td><button type="button" name="export" id="export" class="btn btn-success">Export</button></td>
+                        </tr>
+                        @endforeach
+                    </table>
+
+                    {{-- Pagination --}}
+                    <div class="d-flex justify-content-center">
+                        {!! $invoices_mini->links() !!}
+                    </div>
                 </div>
             </div>
         </div>

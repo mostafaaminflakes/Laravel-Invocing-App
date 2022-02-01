@@ -23,55 +23,88 @@
                         </div>
                         @endif
                         <div class="fw-bold border-bottom mb-3">Client Information</div>
-                        <div class="mb-3 form-group">
-                            <label for="client_name" class="form-label">Name</label>
-                            <input type="text" name="client_name" id="client_name" class="form-control{{ $errors->has('client_name') ? ' is-invalid' : '' }}" value="{{ (old('client_name') ? old('client_name') : '' ) }}" placeholder="Client name">
-                            <div class="text-danger fs-6"></div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <div>
+                                    <label for="client_name" class="form-label">Name <span class="fw-light fs-6 text-danger">*</span></label>
+                                    <input type="text" name="client_name" id="client_name" class="form-control" value="{{ (old('client_name') ? old('client_name') : '' ) }}" placeholder="Client name">
+                                </div>
+                                <div class="text-danger fs-6 err-msg"></div>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <div>
+                                    <label for="client_vat_number" class="form-label">VAT Number <span class="fw-light fs-6 text-danger">*</span></label>
+                                    <input type="text" name="client_vat_number" id="client_vat_number" class="form-control" value="{{ (old('client_vat_number') ? old('client_vat_number') : '' ) }}" placeholder="Client VAT number">
+                                </div>
+                                <div class="text-danger fs-6 err-msg"></div>
+                            </div>
                         </div>
-                        <div class="mb-3 form-group{{ $errors->has('client_address') ? ' danger' : '' }}">
-                            <label for="client_address" class="form-label">Address</label>
-                            <input type="text" name="client_address" id="client_address" class="form-control{{ $errors->has('client_address') ? ' is-invalid' : '' }}" value="{{ (old('client_address') ? old('client_address') : '' ) }}" placeholder="Client address">
-                            <div class="text-danger fs-6" id="client_address_msg"></div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <div>
+                                    <label for="project_name" class="form-label">Project Name <span class="fw-light fs-6 text-danger">*</span></label>
+                                    <input type="text" name="project_name" id="project_name" class="form-control" value="{{ (old('project_name') ? old('project_name') : '' ) }}" placeholder="Project Name">
+                                </div>
+                                <div class="text-danger fs-6 err-msg"></div>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <div>
+                                    <label for="project_number" class="form-label">Project Number <span class="fw-light fs-6 text-danger">*</span></label>
+                                    <input type="text" name="project_number" id="project_number" class="form-control" value="{{ (old('project_number') ? old('project_number') : '' ) }}" placeholder="Project Number">
+                                </div>
+                                <div class="text-danger fs-6 err-msg"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="notes" class="form-label">Notes</label>
+                            <input type="text" name="notes" id="notes" class="form-control" value="{{ (old('notes') ? old('notes') : '' ) }}" placeholder="Notes">
+                            <div class="text-danger fs-6 err-msg"></div>
+                        </div>
 
-                        </div>
-                        <div class="mb-3 form-group{{ $errors->has('client_vat_number') ? ' has-error' : '' }}">
-                            <label for="client_vat_number" class="form-label">VAT Number</label>
-                            <input type="text" name="client_vat_number" id="client_vat_number" class="form-control{{ $errors->has('client_vat_number') ? ' is-invalid' : '' }}" value="{{ (old('client_vat_number') ? old('client_vat_number') : '' ) }}" placeholder="Client VAT number">
-                            <div class="text-danger fs-6"></div>
-
-                        </div>
-
-                        <div class="fw-bold border-bottom mt-5 mb-3">Invoice Details</div>
-                        <div class="alert alert-danger show-error-message" style="display:none">
-                            <ul></ul>
-                        </div>
-                        <div class="alert alert-success show-success-message" style="display:none">
-                            <ul></ul>
-                        </div>
-                        @error('client_vat_number')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <div class="fw-bold border-bottom mt-3 mb-3">Invoice Details</div>
                         <table class="table table-bordered" id="dynamicTable">
                             <tr class="bg-light text-dark h6">
-                                <th>Serice Name</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
+                                <th>Service Name <span class="fw-light fs-6 text-danger">*</span></th>
+                                <th>Unit <span class="fw-light fs-6 text-danger">*</span></th>
+                                <th>Completion <span class="fw-light fs-6 text-danger">*</span></th>
+                                <th>Unit Price <span class="fw-light fs-6 text-danger">*</span></th>
+                                <th>Quantity <span class="fw-light fs-6 text-danger">*</span></th>
                                 <th></th>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" name="invoice_items[0][service_name]" placeholder="Service name" class="form-control{{ $errors->has('invoice_items.0.service_name') ? ' is-invalid' : '' }}" />
-                                    <div class="text-danger fs-6"></div>
+                                    <div class="input-group">
+                                        <input type="text" name="invoice_items[0][service_name]" placeholder="Service name" class="form-control{{ $errors->has('invoice_items.0.service_name') ? ' is-invalid' : '' }}" />
+                                    </div>
+                                    <div class="text-danger fs-6 err-msg"></div>
                                 </td>
                                 <td>
-                                    <input type="text" name="invoice_items[0][unit_price]" placeholder="Unit price" class="form-control{{ $errors->has('invoice_items.0.unit_price') ? ' is-invalid' : '' }}" />
-                                    <div class="text-danger fs-6"></div>
+                                    <div class="input-group">
+                                        <input type="text" name="invoice_items[0][unit]" placeholder="Unit" class="form-control{{ $errors->has('invoice_items.0.unit') ? ' is-invalid' : '' }}" />
+                                    </div>
+                                    <div class="text-danger fs-6 err-msg"></div>
                                 </td>
                                 <td>
-                                    <input type="text" name="invoice_items[0][quantity]" placeholder="Quantity" class="form-control{{ $errors->has('invoice_items.0.quantity') ? ' is-invalid' : '' }}" />
-                                    <div class="text-danger fs-6"></div>
+                                    <div class="input-group">
+                                        <input type="text" name="invoice_items[0][completion]" placeholder="Completion rate" class="form-control{{ $errors->has('invoice_items.0.completion') ? ' is-invalid' : '' }}" />
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    <div class="text-danger fs-6 err-msg d-sm-block"></div>
                                 </td>
-                                <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-text">SAR</span>
+                                        <input type="text" name="invoice_items[0][unit_price]" placeholder="Unit price" class="form-control{{ $errors->has('invoice_items.0.unit_price') ? ' is-invalid' : '' }}" />
+                                    </div>
+                                    <div class="text-danger fs-6 err-msg"></div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" name="invoice_items[0][quantity]" placeholder="Quantity" class="form-control{{ $errors->has('invoice_items.0.quantity') ? ' is-invalid' : '' }}" />
+                                    </div>
+                                    <div class="text-danger fs-6 err-msg"></div>
+                                </td>
+                                <td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td>
                             </tr>
                         </table>
                         <button type="submit" class="btn btn-primary" id="submit">Create Invoice</button>
@@ -87,7 +120,7 @@
         var i = 0;
         $("#add").click(function() {
             ++i;
-            $("#dynamicTable").append('<tr><td><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="Service name" class="form-control" /><div class="text-danger fs-6"></div></td><td><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="Unit price" class="form-control" /><div class="text-danger fs-6"></div></td><td><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="Quantity" class="form-control" /><div class="text-danger fs-6"></div></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+            $("#dynamicTable").append('<tr><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="Service name" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][unit]" placeholder="Unit" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][completion]" placeholder="Completion rate" class="form-control" /><span class="input-group-text">%</span></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><span class="input-group-text">SAR</span><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="Unit price" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="Quantity" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
         });
 
         $(document).on('click', '.remove-tr', function() {
@@ -109,23 +142,38 @@
                         $('#spinner').addClass('spinner');
                     }
                 })
-                .done(function(data) {
+                .done(function(data, textStatus, xhr) {
                     // Laravel FormRequest using AJAX returns 422 status code failed validation.
                     // That's why we handle validation in the failed method.
+                    $("#submit").prop('disabled', false);
+                    $('#spinner').removeClass('spinner');
+                    if (xhr.status == 200 && data.success == true) {
+                        window.location.href = "{{ route('home') }}";
+                    }
                 })
                 .fail(function(data) {
                     $("#submit").prop('disabled', false);
                     $('#spinner').removeClass('spinner');
-                    $.each(data.responseJSON.errors, function(key, value) {
-                        if (~key.indexOf(".")) {
-                            newkey = key.split('.');
-                            key = newkey[0] + '[' + newkey[1] + '][' + newkey[2] + ']';
-                        }
-                        var input = '#add_invoice_items input[name="' + key + '"]';
-                        $(input + '+div').text(value);
-                        $(input).addClass('is-invalid');
+                    $('form#add_invoice_items input[type=text]').each(function() {
+                        //$(this).siblings('.err-msg').text('');
+                        $(this).parent().next('div.err-msg').text('');
+                        $(this).removeClass('is-invalid');
                     });
+
+                    if (data.status == 422) { // When status code is 422, it's a validation issue
+                        $.each(data.responseJSON.errors, function(key, value) {
+                            if (~key.indexOf(".")) {
+                                newkey = key.split('.');
+                                key = newkey[0] + '[' + newkey[1] + '][' + newkey[2] + ']';
+                            }
+                            var input = '#add_invoice_items input[name="' + key + '"]';
+                            // $(input + '+div').text(value);
+                            $(input).parent().next('div.err-msg').text(value);
+                            $(input).addClass('is-invalid');
+                        });
+                    }
                 });
+
         });
     });
 </script>

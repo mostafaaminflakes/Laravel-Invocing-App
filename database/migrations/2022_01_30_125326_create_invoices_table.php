@@ -15,10 +15,13 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
             $table->integer('invoice_number');
             $table->string('client_name');
-            $table->integer('client_address');
-            $table->integer('client_vat_number');
+            $table->string('client_vat_number');
+            $table->string('project_name');
+            $table->string('project_number');
+            $table->text('notes')->default(null);
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class InvoiceItems extends Model
 
     //public $table = "invoice_items";
 
-    protected $fillable = ['service_name', 'unit_price', 'quantity'];
+    protected $fillable = ['invoice_id', 'service_name', 'unit', 'completion', 'unit_price', 'quantity'];
 
     public function invoice()
     {
