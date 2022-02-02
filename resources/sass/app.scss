@@ -16,7 +16,7 @@ $primary: #61451d;
 
 body {
     font-family: "Nunito";
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 .spinner:after {
-    content: '';
+    content: "";
     box-sizing: border-box;
     position: absolute;
     top: 50%;
@@ -53,5 +53,5 @@ body {
     border: 2px solid transparent;
     border-top-color: #61451d;
     border-bottom-color: #61451d;
-    animation: spinner .8s ease infinite;
+    animation: spinner 0.8s ease infinite;
 }
