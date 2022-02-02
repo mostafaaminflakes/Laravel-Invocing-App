@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="">
                 <div class="d-flex justify-content-between">
-                    <div>{{ __('NEW INVOICE') }}</div>
-                    <div class="fw-light fs-6 mt-1">Total invoices: {{ $invoices_mini->total() }}</div>
+                    <div><strong>{{ __('INVOICES') }}</strong></div>
+                    <div class="fw-light fs-6 mt-1">{{ __('Total invoices') }}: {{ $invoices_mini->total() }}</div>
                 </div>
 
                 <div class="card-body">
@@ -24,10 +24,10 @@
                             <thead class="table-secondary">
                                 <tr>
                                     <th>#</th>
-                                    <th>Invoice Number</th>
-                                    <th>Client Name</th>
-                                    <th>Project Name</th>
-                                    <th>Date</th>
+                                    <th>{{ __('Invoice Number') }}</th>
+                                    <th class="col-sm-3">{{ __('Client Name') }}</th>
+                                    <th class="col-sm-3">{{ __('Project Name') }}</th>
+                                    <th>{{ __('Date') }}</th>
                                     <th>&nbsp;</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -40,8 +40,8 @@
                                     <td>{{ $invoice_mini->client_name }}</td>
                                     <td>{{ $invoice_mini->project_name }}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
-                                    <td><button type="button" name="details" id="details" class="btn btn-primary btn-sm">Details</button></td>
-                                    <td><button type="button" name="export" id="export" class="btn btn-success btn-sm">Export</button></td>
+                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
+                                    <td><button type="button" name="export" id="export" class="btn btn-success btn-sm">{{ __('Export') }}</button></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <div class="card-header">{{ __('SEARCH') }}</div>
 
@@ -92,7 +92,7 @@
                         </span>
                     </div> -->
 
-                    <div><a class="btn btn-primary" href="{{ route('create') }}">New Invoice</a></div>
+                    <div><a class="btn btn-primary" href="{{ route('create') }}">{{ __('New Invoice') }}</a></div>
 
                 </div>
             </div>

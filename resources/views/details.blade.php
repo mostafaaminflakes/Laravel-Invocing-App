@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <div><strong>{{ __('NEW INVOICE') }}</strong></div>
+                    <div><strong>{{ __('INVOICE DETAILS') }}</strong></div>
                     <!-- <div class="fw-light fs-6 mt-1">Invoice Number: OSX-001</div> -->
                 </div>
                 <div class="card-body">

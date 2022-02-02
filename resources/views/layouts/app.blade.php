@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{(App::isLocale('en') ? 'ltr' : 'rtl')}}">
 
 <head>
     <meta charset="utf-8">
@@ -16,14 +16,19 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,800" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:300,800" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Tajawal:300,800" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.jpg') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @if(App::isLocale('ar'))
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous"> -->
+    @endif
 </head>
 
-<body dir="{{(App::isLocale('en') ? 'ltr' : 'rtl')}}">
+<body>
+    <!-- dir="{{(App::isLocale('en') ? 'ltr' : 'rtl')}}"-->
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -38,11 +43,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav {{(App::isLocale('en') ? 'me-auto' : 'ms-auto')}}">
-                        INVOICES
+                        <strong>{{ __('INVOICES') }}</strong>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav  {{(App::isLocale('en') ? 'ms-auto' : 'me-auto')}}">
+                    <ul class="navbar-nav {{(App::isLocale('en') ? 'ms-auto' : 'me-auto')}}">
+                        <!-- {{(App::isLocale('en') ? 'ms-auto' : 'me-auto')}} -->
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -60,7 +66,7 @@
                         @endif
                         @else
                         <li class="nav-item">
-                            <span class="nav-link">Welcome <strong>{{ Auth::user()->name }}</strong></span>
+                            <span class="nav-link">{{ __('Welcome') }} <strong>{{ Auth::user()->name }}</strong></span>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('settings') }}">
@@ -105,6 +111,7 @@
                 </div>
             </div>
         </nav>
+
 
         <main class="py-4">
             @yield('content')

@@ -40,20 +40,20 @@ class CreateOrEditInvoiceRequest extends FormRequest
     public function messages()
     {
         return [
-            'client_name.required' => 'Client name is required.',
-            'client_vat_number.required' => 'VAT number is required.',
-            'client_vat_number.digits' => 'VAT number must be 15 digits.',
-            'project_name.required' => 'Project name is required.',
-            'project_number.required' => 'Project number is required.',
-            'invoice_items.*.service_name.required' => 'Service name is required.',
-            'invoice_items.*.unit.required' => 'Unit is required.',
-            'invoice_items.*.unit.numeric' => 'Unit must be a number.',
-            'invoice_items.*.completion.required' => 'Completion is required.',
-            'invoice_items.*.completion.numeric' => 'Completion must be a number.',
-            'invoice_items.*.unit_price.required' => 'Unit price is required.',
-            'invoice_items.*.unit_price.numeric' => 'Unit price must be a number.',
-            'invoice_items.*.quantity.required' => 'Quantity is required.',
-            'invoice_items.*.quantity.integer' => 'Quantity must be a number.',
+            'client_name.required' => __('Client name is required.'),
+            'client_vat_number.required' => __('VAT number is required.'),
+            'client_vat_number.digits' => __('VAT number must be 15 digits.'),
+            'project_name.required' => __('Project name is required.'),
+            'project_number.required' => __('Project number is required.'),
+            'invoice_items.*.service_name.required' => __('Service name is required.'),
+            'invoice_items.*.unit.required' => __('Unit is required.'),
+            'invoice_items.*.unit.numeric' => __('Unit must be a number.'),
+            'invoice_items.*.completion.required' => __('Completion is required.'),
+            'invoice_items.*.completion.numeric' => __('Completion must be a number.'),
+            'invoice_items.*.unit_price.required' => __('Unit price is required.'),
+            'invoice_items.*.unit_price.numeric' => __('Unit price must be a number.'),
+            'invoice_items.*.quantity.required' => __('Quantity is required.'),
+            'invoice_items.*.quantity.integer' => __('Quantity must be a number.'),
         ];
     }
 }

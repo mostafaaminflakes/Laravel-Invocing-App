@@ -41,9 +41,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        // $invoices_mini = InvoiceModel::select('invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->get();
         $invoices_mini = InvoiceModel::select('id', 'invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->paginate(10);
-        //$invoices_count = $invoices_mini->count();
         return view('home', compact('invoices_mini'));
     }
 
@@ -64,13 +62,7 @@ class InvoiceController extends Controller
             InvoiceItems::create($item);
         }
 
-        // return redirect('home');
-        // return back()->withInput();
-
         return response()->json(['success' => true]);
-        // }
-
-        // return back()->with('success', 'Invoice Created Successfully.');
     }
 
     /**
