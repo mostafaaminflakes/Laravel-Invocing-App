@@ -48,5 +48,13 @@
     "Unit price is required.": "سعر الوحدة مطلوب.",
     "Unit price must be a number.": "يجب أن يكون سعر الوحدة رقمًا.",
     "Quantity is required.": "الكمية مطلوبة.",
-    "Quantity must be a number.": "يجب أن تكون الكمية رقمًا."
+    "Quantity must be a number.": "يجب أن تكون الكمية رقمًا.",
+    "Total Amount Before VAT": "الإجمالي قبل الضريبة",
+    "VAT": "ضريبة القيمة المضافة",
+    "Total Amount After VAT": "الإجمالي بعد الضريبة",
+    "Net Amount": "المجموع",
+    "INVOICE DETAILS": "تفاصيل الفاتورة",
+    "CR Number": "رقم السجل التجاري",
+    "Seller Information": "بيانات البائع",
+    "Simplified Tax Invoice": "فاتورة ضريبية مبسطة"
 }

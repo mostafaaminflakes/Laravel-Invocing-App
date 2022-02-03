@@ -44,5 +44,13 @@
     "Unit price is required.": "Unit price is required.",
     "Unit price must be a number.": "Unit price must be a number.",
     "Quantity is required.": "Quantity is required.",
-    "Quantity must be a number.": "Quantity must be a number."
+    "Quantity must be a number.": "Quantity must be a number.",
+    "Total Amount Before VAT": "Total Amount Before VAT",
+    "VAT": "VAT",
+    "Total Amount After VAT": "Total Amount After VAT",
+    "Net Amount": "Net Amount",
+    "INVOICE DETAILS": "INVOICE DETAILS",
+    "CR Number": "CR Number",
+    "Seller Information": "Seller Information",
+    "Simplified Tax Invoice": "Simplified Tax Invoice"
 }

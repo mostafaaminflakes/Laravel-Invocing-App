@@ -5,131 +5,176 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <div><strong>{{ __('INVOICE DETAILS') }}</strong></div>
                     <!-- <div class="fw-light fs-6 mt-1">Invoice Number: OSX-001</div> -->
+                    <div class="fw-light fs-6 mt-1"><button type="submit" class="btn btn-success btn-lg" id="submit">{{ __('Export') }}</button></div>
                 </div>
                 <div class="card-body">
                     <!-- <form method="post" action="{{ route('store') }}" name="add_invoice_items" id="add_invoice_items"> -->
                     <form name="add_invoice_items" id="add_invoice_items">
                         @csrf
-                        @if($errors->any())
-                        <div class="alert alert-danger fs-6">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        <div class="fw-bold border-bottom mb-3">{{ __('Client Information') }}</div>
-                        <div class="row">
-                            <div class="col mb-3">
-                                <div>
-                                    <label for="client_name" class="form-label">{{ __('Name') }} <span class="fw-light fs-6 text-danger">*</span></label>
-                                    <p>{{ $invoice->client_name }}</p>
-                                </div>
-                                <div class="text-danger fs-6 err-msg"></div>
+                        <div class="col-md-12 row mb-3">
+                            <div class="col-4">
+                                <img src="{{ asset('/images/logo_emara.jpg') }}" alt="">
                             </div>
-                            <div class="col-sm-4 mb-3">
-                                <div>
-                                    <label for="client_vat_number" class="form-label">{{ __('VAT Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <p>{{ $invoice->client_vat_number }}</p>
+                            <div class="col-4 justify-content-center align-items-center d-flex">
+                                <div class="h1">
+                                    <div>{{ __('Simplified Tax Invoice') }}</div>
+                                    Simplified Tax Invoice
                                 </div>
-                                <div class="text-danger fs-6 err-msg"></div>
+                            </div>
+                            <div class="col-4 text-start">
+                                <img src="{{ asset('/images/logo_emara.jpg') }}" alt="">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mb-3">
-                                <div>
-                                    <label for="project_name" class="form-label">{{ __('Project Name') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <p>{{ $invoice->project_name }}</p>
-                                </div>
-                                <div class="text-danger fs-6 err-msg"></div>
+                        <div class="col-md-12 row mb-3">
+                            <div>
+                                <div class="float-end ps-1">{{ __('Invoice Number') }} - Invoice Number:</div>
+                                <div>EFC00{{ $invoice->invoice_number }}</div>
                             </div>
-                            <div class="col-sm-4 mb-3">
-                                <div>
-                                    <label for="project_number" class="form-label">{{ __('Project Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <p>{{ $invoice->project_number }}</p>
-                                </div>
-                                <div class="text-danger fs-6 err-msg"></div>
+                            <div>
+                                <div class="float-end ps-1">{{ __('Date') }} - Date:</div>
+                                <div>{{ $invoice->created_at }}</div>
                             </div>
                         </div>
-                        <div>
-                            <label for="notes" class="form-label">{{ __('Notes') }}</label>
-                            <p>{{ ! empty($invoice->notes) ? $invoice->notes : '--' }}</p>
-                            <div class="text-danger fs-6 err-msg"></div>
-                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="fw-bold border-bottom col-11">{{ __('Seller Information') }} - Seller Information</div>
+                                    <div class="col-11">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="col-4">{{ __('Name') }}</td>
+                                                <td class="pe-4">{{ $invoice->client_name }}</td>
+                                                <td class="text-start col-4">Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('VAT Number') }}</td>
+                                                <td class="pe-4">{{ $invoice->client_vat_number }}</td>
+                                                <td class="text-start">VAT Number</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('CR Number') }}</td>
+                                                <td class="pe-4">{{ $invoice->project_number }}</td>
+                                                <td class="text-start">CR Number</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="fw-bold border-bottom col-12">{{ __('Client Information') }} - Client Information</div>
+                                    <div class="col-12">
+                                        <table class="table">
+                                            <tr>
+                                                <td class="col-4">{{ __('Name') }}</td>
+                                                <td class="pe-4">{{ $invoice->client_name }}</td>
+                                                <td class="text-start col-4">Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('VAT Number') }}</td>
+                                                <td class="pe-4">{{ $invoice->client_vat_number }}</td>
+                                                <td class="text-start">VAT Number</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('Project Name') }}</td>
+                                                <td class="pe-4">{{ $invoice->project_name }}</td>
+                                                <td class="text-start">Project Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ __('Project Number') }}</td>
+                                                <td class="pe-4">{{ $invoice->project_number }}</td>
+                                                <td class="text-start">Project Number</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="fw-bold border-bottom mt-3 mb-3">{{ __('Invoice Details') }}</div>
-                        <table class=" table table-bordered" id="dynamicTable">
-                            <tr class="bg-light text-dark h6">
-                                <th>{{ __('Service Name') }}</th>
-                                <th>{{ __('Unit') }}</th>
-                                <th>{{ __('Completion') }}</th>
-                                <th>{{ __('Unit Price') }}</th>
-                                <th>{{ __('Quantity') }}</th>
-                                <th>{{ __('Net Amount') }}</th>
-                            </tr>
-                            @php
-                            $total_before_vat = 0;
-                            @endphp
-                            @foreach ($invoice_items as $invoice_item)
-                            @php
-                            $total_before_vat += $invoice_item->unit_price * $invoice_item->quantity;
-                            @endphp
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <p>{{ $invoice_item->service_name }}</p>
-                                    </div>
+                            <div class="row">
+                                <div>
+                                    <label for="notes" class="form-label">{{ __('Notes') }}</label>
+                                    {{ ! empty($invoice->notes) ? $invoice->notes : '--' }}
                                     <div class="text-danger fs-6 err-msg"></div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <p>{{ $invoice_item->unit }}</p>
-                                    </div>
-                                    <div class="text-danger fs-6 err-msg"></div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <p>{{ $invoice_item->completion }}%</p>
-                                    </div>
-                                    <div class="text-danger fs-6 err-msg d-sm-block"></div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <p>{{ $invoice_item->unit_price }} {{ __('SAR') }}</p>
-                                    </div>
-                                    <div class="text-danger fs-6 err-msg"></div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <p>{{ $invoice_item->quantity }}</p>
-                                    </div>
-                                    <div class="text-danger fs-6 err-msg"></div>
-                                </td>
-                                <td>{{ $invoice_item->unit_price * $invoice_item->quantity }} {{ __('SAR') }}</td>
-                            </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="4"></td>
-                                <td>{{ __('Total Amount Before VAT') }}</td>
-                                <td>{{ round($total_before_vat) }} {{ __('SAR') }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"></td>
-                                <td>{{ __('VAT') }} 15%</td>
-                                <td>{{ round($total_before_vat * 0.15) }} {{ __('SAR') }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"></td>
-                                <td>{{ __('Total Amount After VAT') }}</td>
-                                <td>{{ round($total_before_vat * 1.15) }} {{ __('SAR') }}</td>
-                            </tr>
-                        </table>
-                        <button type="submit" class="btn btn-success" id="submit">{{ __('Export') }}</button>
-                        <div id="spinner"></div>
+                                </div>
+                            </div>
+
+                            <div class="fw-bold border-bottom mt-3 mb-3">{{ __('Invoice Details') }} - Invoice Details</div>
+                            <table class="table table-bordered" id="dynamicTable">
+                                <tr class="bg-light text-dark h6">
+                                    <th class="col-4">
+                                        <p class="m-0 pb-1">{{ __('Service Name') }}</p>
+                                        <p class="m-0">Service Name</p>
+                                    </th>
+                                    <th class="col-1">
+                                        <p class="m-0 pb-1">{{ __('Unit') }}
+                                        <p class="m-0">Unit</p>
+                                    </th>
+                                    <th class="col-1">
+                                        <p class="m-0 pb-1">{{ __('Completion') }}</p>
+                                        <p class="m-0">Completion</p>
+                                    </th>
+                                    <th class="col-1">
+                                        <p class="m-0 pb-1">{{ __('Unit Price') }}</p>
+                                        <p class="m-0">Unit Price</p>
+                                    </th>
+                                    <th class="col-1">
+                                        <p class="m-0 pb-1">{{ __('Quantity') }}</p>
+                                        <p class="m-0">Quantity</p>
+                                    </th>
+                                    <th class="col-1">
+                                        <p class="m-0 pb-1">{{ __('Net Amount') }}</p>
+                                        <p class="m-0">Net Amount</p>
+                                    </th>
+                                </tr>
+                                @php
+                                $total_before_vat = 0;
+                                @endphp
+                                @foreach ($invoice_items as $invoice_item)
+                                @php
+                                $total_before_vat += $invoice_item->unit_price * $invoice_item->quantity;
+                                @endphp
+                                <tr>
+                                    <td>{{ $invoice_item->service_name }}</td>
+                                    <td>{{ $invoice_item->unit }}</td>
+                                    <td>{{ $invoice_item->completion }}%</td>
+                                    <td>{{ $invoice_item->unit_price }} {{ __('SAR') }}</td>
+                                    <td>{{ $invoice_item->quantity }}</td>
+                                    <td>{{ $invoice_item->unit_price * $invoice_item->quantity }} {{ __('SAR') }}</td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td class="col-6">&nbsp;</td>
+                                    <td class="text-start ps-4 fw-bold border-bottom col-2">
+                                        <p class="m-0 pb-1">{{ __('Total Amount Before VAT') }}</p>
+                                        <p class="m-0">Total Amount Before VAT</p>
+                                    </td>
+                                    <td class="col-1 border-bottom">{{ round($total_before_vat) }} {{ __('SAR') }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-6">&nbsp;</td>
+                                    <td class="text-start ps-4 fw-bold border-bottom">
+                                        <p class="m-0 pb-1">{{ __('VAT') }} 15%</p>
+                                        <p class="m-0">VAT 15%</p>
+                                    </td>
+                                    <td class="border-bottom">{{ round($total_before_vat * 0.15) }} {{ __('SAR') }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-6">&nbsp;</td>
+                                    <td class="text-start ps-4 fw-bold border-bottom">
+                                        <p class="m-0 pb-1">{{ __('Total Amount After VAT') }}</p>
+                                        <p class="m-0">Total Amount After VAT</p>
+                                    </td>
+                                    <td class="border-bottom">{{ round($total_before_vat * 1.15) }} {{ __('SAR') }}</td>
+                                </tr>
+                            </table>
+                            <!-- <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-success btn-lg" id="submit">{{ __('Export') }}</button>
+                                <div id="spinner"></div>
+                            </div> -->
+                        </div>
                     </form>
                 </div>
             </div>
@@ -141,7 +186,7 @@
         var i = 0;
         $("#add").click(function() {
             ++i;
-            $("#dynamicTable").append('<tr><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="{{ __("Service name") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][unit]" placeholder="{{ __("Unit") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][completion]" placeholder="{{ __("Completion rate") }}" class="form-control" /><div><span class="input-group-text">%</span></div></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="{{ __("Unit price") }}" class="form-control" /><div><span class="input-group-text">{{ __("SAR") }}</span></div></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="{{ __("Quantity") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><button type="button" class="btn btn-danger remove-tr">{{ __("Remove") }}</button></td></tr>');
+            $("#dynamicTable").append('<tr><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][service_name]" placeholder="{{ __("Service name") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][unit]" placeholder="{{ __("Unit") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][completion]" placeholder="{{ __("Completion rate") }}" class="form-control" /><div><div class="input-group-text">%</div></div></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][unit_price]" placeholder="{{ __("Unit price") }}" class="form-control" /><div><div class="input-group-text">{{ __("SAR") }}</div></div></div><div class="text-danger fs-6 err-msg"></div></td><td><div class="input-group"><input type="text" name="invoice_items[' + i + '][quantity]" placeholder="{{ __("Quantity") }}" class="form-control" /></div><div class="text-danger fs-6 err-msg"></div></td><td><button type="button" class="btn btn-danger remove-tr">{{ __("Remove") }}</button></td></tr>');
         });
 
         $(document).on('click', '.remove-tr', function() {
