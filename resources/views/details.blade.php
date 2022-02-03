@@ -27,14 +27,14 @@
                             <div class="col mb-3">
                                 <div>
                                     <label for="client_name" class="form-label">{{ __('Name') }} <span class="fw-light fs-6 text-danger">*</span></label>
-                                    <input type="text" name="client_name" id="client_name" class="form-control" value="{{ (old('client_name') ? old('client_name') : '' ) }}" placeholder="{{ __('Name') }}">
+                                    <p>{{ $invoice->client_name }}</p>
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
                             </div>
                             <div class="col-sm-4 mb-3">
                                 <div>
                                     <label for="client_vat_number" class="form-label">{{ __('VAT Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <input type="text" name="client_vat_number" id="client_vat_number" class="form-control" value="{{ (old('client_vat_number') ? old('client_vat_number') : '' ) }}" placeholder="{{ __('VAT number') }}">
+                                    <p>{{ $invoice->client_vat_number }}</p>
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
                             </div>
@@ -43,71 +43,92 @@
                             <div class="col mb-3">
                                 <div>
                                     <label for="project_name" class="form-label">{{ __('Project Name') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <input type="text" name="project_name" id="project_name" class="form-control" value="{{ (old('project_name') ? old('project_name') : '' ) }}" placeholder="{{ __('Project Name') }}">
+                                    <p>{{ $invoice->project_name }}</p>
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
                             </div>
                             <div class="col-sm-4 mb-3">
                                 <div>
                                     <label for="project_number" class="form-label">{{ __('Project Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
-                                    <input type="text" name="project_number" id="project_number" class="form-control" value="{{ (old('project_number') ? old('project_number') : '' ) }}" placeholder="{{ __('Project Number') }}">
+                                    <p>{{ $invoice->project_number }}</p>
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
                             </div>
                         </div>
                         <div>
                             <label for="notes" class="form-label">{{ __('Notes') }}</label>
-                            <input type=" text" name="notes" id="notes" class="form-control" value="{{ (old('notes') ? old('notes') : '' ) }}" placeholder="{{ __('Notes') }}">
+                            <p>{{ ! empty($invoice->notes) ? $invoice->notes : '--' }}</p>
                             <div class="text-danger fs-6 err-msg"></div>
                         </div>
 
                         <div class="fw-bold border-bottom mt-3 mb-3">{{ __('Invoice Details') }}</div>
                         <table class=" table table-bordered" id="dynamicTable">
                             <tr class="bg-light text-dark h6">
-                                <th>{{ __('Service Name') }} <span class="fw-light fs-6 text-danger">*</span></th>
-                                <th>{{ __('Unit') }} <span class="fw-light fs-6 text-danger">*</span></th>
-                                <th>{{ __('Completion') }} <span class="fw-light fs-6 text-danger">*</span></th>
-                                <th>{{ __('Unit Price') }} <span class="fw-light fs-6 text-danger">*</span></th>
-                                <th>{{ __('Quantity') }} <span class="fw-light fs-6 text-danger">*</span></th>
-                                <th></th>
+                                <th>{{ __('Service Name') }}</th>
+                                <th>{{ __('Unit') }}</th>
+                                <th>{{ __('Completion') }}</th>
+                                <th>{{ __('Unit Price') }}</th>
+                                <th>{{ __('Quantity') }}</th>
+                                <th>{{ __('Net Amount') }}</th>
                             </tr>
+                            @php
+                            $total_before_vat = 0;
+                            @endphp
+                            @foreach ($invoice_items as $invoice_item)
+                            @php
+                            $total_before_vat += $invoice_item->unit_price * $invoice_item->quantity;
+                            @endphp
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" name="invoice_items[0][service_name]" placeholder="{{ __('Service name') }}" class="form-control{{ $errors->has('invoice_items.0.service_name') ? ' is-invalid' : '' }}" />
+                                        <p>{{ $invoice_item->service_name }}</p>
                                     </div>
                                     <div class="text-danger fs-6 err-msg"></div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" name="invoice_items[0][unit]" placeholder="{{ __('Unit') }}" class="form-control{{ $errors->has('invoice_items.0.unit') ? ' is-invalid' : '' }}" />
+                                        <p>{{ $invoice_item->unit }}</p>
                                     </div>
                                     <div class="text-danger fs-6 err-msg"></div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" name="invoice_items[0][completion]" placeholder="{{ __('Completion rate') }}" class="form-control{{ $errors->has('invoice_items.0.completion') ? ' is-invalid' : '' }}" />
-                                        <div><span class="input-group-text">%</span></div>
+                                        <p>{{ $invoice_item->completion }}%</p>
                                     </div>
                                     <div class="text-danger fs-6 err-msg d-sm-block"></div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" name="invoice_items[0][unit_price]" placeholder="{{ __('Unit price') }}" class="form-control{{ $errors->has('invoice_items.0.unit_price') ? ' is-invalid' : '' }}" />
-                                        <div><span class="input-group-text">{{ __('SAR') }}</span></div>
+                                        <p>{{ $invoice_item->unit_price }} {{ __('SAR') }}</p>
                                     </div>
                                     <div class="text-danger fs-6 err-msg"></div>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" name="invoice_items[0][quantity]" placeholder="{{ __('Quantity') }}" class="form-control{{ $errors->has('invoice_items.0.quantity') ? ' is-invalid' : '' }}" />
+                                        <p>{{ $invoice_item->quantity }}</p>
                                     </div>
                                     <div class="text-danger fs-6 err-msg"></div>
                                 </td>
-                                <td><button type="button" name="add" id="add" class="btn btn-success">{{ __('Add') }}</button></td>
+                                <td>{{ $invoice_item->unit_price * $invoice_item->quantity }} {{ __('SAR') }}</td>
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>{{ __('Total Amount Before VAT') }}</td>
+                                <td>{{ round($total_before_vat) }} {{ __('SAR') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>{{ __('VAT') }} 15%</td>
+                                <td>{{ round($total_before_vat * 0.15) }} {{ __('SAR') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td>{{ __('Total Amount After VAT') }}</td>
+                                <td>{{ round($total_before_vat * 1.15) }} {{ __('SAR') }}</td>
                             </tr>
                         </table>
-                        <button type="submit" class="btn btn-primary" id="submit">{{ __('Create Invoice') }}</button>
+                        <button type="submit" class="btn btn-success" id="submit">{{ __('Export') }}</button>
                         <div id="spinner"></div>
                     </form>
                 </div>

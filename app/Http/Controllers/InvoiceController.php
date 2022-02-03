@@ -65,6 +65,15 @@ class InvoiceController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function details($invoice_id)
+    {
+        $id = substr($invoice_id, 5);
+        $invoice = InvoiceModel::where('invoice_number', $id)->first();
+        $invoice_items = $invoice->items()->get();
+        //dd($invoice_items);
+        return view('details', compact('invoice', 'invoice_items')); //->with('invoice' => $invoice);
+    }
+
     /**
      * Write code on Method
      *
