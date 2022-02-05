@@ -24,6 +24,10 @@ class InvoiceController extends Controller
         return $this->getAmountInWordsWithLocale($amount, $locale);
     }
 
+    // private $invoice_number;
+    // public $invoice;
+    // public $invoice_items;
+
     /**
      * Create a new controller instance.
      *
@@ -65,31 +69,37 @@ class InvoiceController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function details($invoice_id)
+    public function invoice_data()
     {
-        $id = substr($invoice_id, 5);
+        $id = substr('EFC00985113', 5);
         $invoice = InvoiceModel::where('invoice_number', $id)->first();
         $invoice_items = $invoice->items()->get();
-        //dd($invoice_items);
+        // dd($this->invoice_items);
+        return ['invoice' => $invoice, 'invoice_items' => $invoice_items];
+    }
+
+    public function details($invoice_number)
+    {
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::where('invoice_number', $id)->first();
+        $invoice_items = $invoice->items()->get();
+        // $this->invoice_number = $id;
+        // $this->invoice = $invoice;
+        // $this->invoice_items = $invoice_items;
+        // dd($invoice->toArray());
+        // dd($invoice_items->toArray());
         return view('details', compact('invoice', 'invoice_items')); //->with('invoice' => $invoice);
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    // public function generateUniqueCode()
-    // {
-    //     do {
-    //         $code = random_int(100000, 999999);
-    //     } while (InvoiceModel::where("invoice_number", "=", $code)->first());
-
-    //     return $code;
-    // }
-
-    public function MakeInvoice()
+    public function MakeInvoice1()
     {
+        return 'aaa';
+    }
+
+    public function make_invoice($invoice_number)
+    {
+        //$this->invoice_data($invoice_number);
+
         $client = new Party([
             'name'          => 'Roosevelt Lloyd',
             'phone'         => '(520) 318-9486',
@@ -164,7 +174,7 @@ class InvoiceController extends Controller
             ->addItems($items)
             ->notes($notes)
             ->logo(public_path('vendor/invoices/sample-logo.png'))
-            ->template('emara')
+            ->template('details1')
             // You can additionally save generated invoice to configured disk
             ->save('public');
 
@@ -172,8 +182,20 @@ class InvoiceController extends Controller
         // Then send email to party with link
 
         // And return invoice itself to browser or have a different view
-        //return $invoice->stream();
         return $invoice->stream();
-        // PDFInvoice
     }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    // public function generateUniqueCode()
+    // {
+    //     do {
+    //         $code = random_int(100000, 999999);
+    //     } while (InvoiceModel::where("invoice_number", "=", $code)->first());
+
+    //     return $code;
+    // }
 }

@@ -17,7 +17,6 @@
                     </div>
                     @endif
 
-                    <!-- <p><a href="{{ route('download-invoice') }}">Download Invoice</a></p> -->
                     <div class="table-responsive mb-3">
                         <table class="table table-striped table-hover align-middle" id="dynamicTable">
                             <!-- table-sm -->
@@ -41,7 +40,7 @@
                                     <td>{{ $invoice_mini->project_name }}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
-                                    <td><button type="button" name="export" id="export" class="btn btn-success btn-sm">{{ __('Export') }}</button></td>
+                                    <td><a href="{{ route('download-invoice', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-success btn-sm">{{ __('Export') }}</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

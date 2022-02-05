@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
+const postcssCustomProperties = require("postcss-custom-properties");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,65 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+// mix.js("resources/js/app.js", "public/js")
+//     .sass("resources/sass/app.scss", "public/css")
+//     .sourceMaps();
+
+// mix.webpackConfig({
+//     stats: {
+//         children: true,
+//     },
+// });
+
+// postcss([
+//     postcssCustomProperties({
+//         preserve: false,
+//     }),
+// ]).process(YOUR_CSS /*, processOptions */);
+// module.exports = {
+//     module: {
+//         rules: [
+//             {
+//                 test: /\.css$/,
+//                 use: ["style-loader", "postcss-loader"],
+//             },
+//         ],
+//     },
+// };
+// mix.js("resources/js/app.js", "public/js").postCss(
+//     "resources/sass/app.scss",
+//     "public/css"
+// );
+
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .options({
+        postCss: [
+            require("postcss-custom-properties")({
+                preserve: false,
+            }),
+        ],
+    })
     .sourceMaps();
+
+// mix.js("resources/js/app.js", "public/js").postCss(
+//     "resources/sass/app.scss",
+//     "public/css",
+//     [
+//         postcssCustomProperties({
+//             preserve: false,
+//         }),
+//     ]
+// );
+
+// mix.js("resources/js/app.js", "public/js").postCss(
+//     "resources/css/app.css",
+//     "public/css",
+//     [
+//         require("bootstrap"),
+//         postcssCustomProperties({
+//             preserve: false,
+//             importFrom: "public/css/app.css",
+//         }),
+//     ]
+// );
