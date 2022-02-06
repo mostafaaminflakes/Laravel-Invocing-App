@@ -12903,8 +12903,9 @@ readers do not read off random characters that represent icons */
                                 </div>
                             </div>
                             <div class="col-4 text-start" style="border:0px solid red; float: right;">
-                                <img src="images/logo_emara.jpg" alt="">
+                                <img style="width: 100px;" src="storage/qr_images/EFC00{{ $invoice->invoice_number }}.png" alt="QR Code" />
                             </div>
+
                         </div>
                         <div style="margin-bottom: 15px;">
                             <table>

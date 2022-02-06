@@ -12,6 +12,7 @@ use App\Http\Requests\CreateOrEditInvoiceRequest;
 use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\QRController;
 use NumberFormatter;
 
 class InvoiceController extends Controller
@@ -25,7 +26,6 @@ class InvoiceController extends Controller
 
     public function getAmountInWords($amount, $locale = 'ar_SA')
     {
-        // dd($this->currency_code);
         return $this->getAmountInWordsWithLocale($amount, $locale);
         return $this;
     }
@@ -64,7 +64,7 @@ class InvoiceController extends Controller
         }
 
         // Generate QR image
-
+        (new QRController)->generate($invoice->zatca_data, $invoice->invoice_number);
 
         // Generate PDF
         $this->make_invoice('EFC00' . $invoice->invoice_number);
@@ -74,11 +74,10 @@ class InvoiceController extends Controller
 
     public function invoice_data($invoice_number)
     {
-        // $id = substr('EFC00985113', 5);
         $id = substr($invoice_number, 5);
         $invoice = InvoiceModel::where('invoice_number', $id)->firstOrFail();
         $invoice_items = $invoice->items()->get();
-        // dd($this->invoice_items);
+
         return ['invoice' => $invoice, 'invoice_items' => $invoice_items];
     }
 
@@ -87,20 +86,16 @@ class InvoiceController extends Controller
         $id = substr($invoice_number, 5);
         $invoice = InvoiceModel::where('invoice_number', $id)->firstOrFail();
         $invoice_items = $invoice->items()->get();
-        // $this->invoice_number = $id;
         // $this->invoice = $invoice;
         // $this->invoice_items = $invoice_items;
         // dd($invoice->toArray());
         // dd($invoice_items->toArray());
-        return view('details', compact('invoice', 'invoice_items')); //->with('invoice' => $invoice);
+        return view('details', compact('invoice', 'invoice_items'));
     }
 
     public static function get_amount_in_words($total_amount_after_vat)
     {
-        // return (new self)->getAmountInWords($total_amount_after_vat, 'ar_SA');
         return (new self)->amount_in_words($total_amount_after_vat, 'ar_SA');
-        // return (new self)->getAmountInWords($total_amount_after_vat, 'ar_SA');
-        // return (new self)->getAmountInWordsWithLocale($total_amount_after_vat, 'ar_SA');
     }
 
     public function amount_in_words(float $amount, ?string $locale = null)

@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-4 text-start">
-                    <img src="{{ asset('/images/logo_emara.jpg') }}" alt="">
+                    <img style="width: 100px;" src="{{ asset('/storage/qr_images/') . '/EFC00' . $invoice->invoice_number . '.png' }}" alt="QR Code" />
                 </div>
             </div>
             <div class="col-md-12 row mb-3">
@@ -40,12 +40,12 @@
                             <table class="table">
                                 <tr>
                                     <td class="col-4">{{ __('Name') }}</td>
-                                    <td class="pe-4">{{ $invoice->client_name }}</td>
+                                    <td class="pe-4">{{ config('efc.seller_name') }}</td>
                                     <td class="text-start col-4">Name</td>
                                 </tr>
                                 <tr>
                                     <td>{{ __('VAT Number') }}</td>
-                                    <td class="pe-4">{{ $invoice->client_vat_number }}</td>
+                                    <td class="pe-4">{{ config('efc.seller_vat') }}</td>
                                     <td class="text-start">VAT Number</td>
                                 </tr>
                                 <tr>
@@ -147,7 +147,7 @@
                             </div>
                             <div>
                                 <p class="fw-bold">مؤسسة العمارة والفن للمقاولات</p>
-                                <p>بنك البلاد - آيبان: SA4810000000484424000107</p>
+                                <p>بنك البلاد - آيبان: {{ config('efc.iban') }}</p>
                             </div>
                         </td>
                         <td class="text-start ps-4 fw-bold border-bottom col-2">

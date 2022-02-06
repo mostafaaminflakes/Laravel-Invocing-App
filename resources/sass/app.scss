@@ -5,6 +5,7 @@
 @import "variables";
 
 // Font Awesome
+$fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
@@ -20,10 +21,8 @@ body {
     font-weight: 400;
 }
 
-/* make primary button bold */
 .btn-primary {
     color: #fff;
-    // font-weight: bold;
 }
 
 @keyframes spinner {
