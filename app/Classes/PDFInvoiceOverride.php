@@ -45,9 +45,9 @@ class PDFInvoiceOverride extends Invoice
 
         $this->pdf = PDF::loadView('vendor.invoices.templates.details', ['invoice' => $invoice_data->invoice, 'invoice_items' => $invoice_data->invoice_items]);
         $output = $this->pdf->output();
-        Storage::disk('invoices')->put('EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
+        //Storage::disk('invoices')->put('EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
 
-        return Storage::disk('invoices')->put('-EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
+        return Storage::disk('invoices')->put('EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
     }
 
     public function withInvoiceNumber($invoice_number)

@@ -7,11 +7,11 @@ use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Traits\CurrencyFormatter;
-use LaravelDaily\Invoices\Traits\SavesFiles;
 use App\Classes\PDFInvoiceOverride;
 use App\Http\Requests\CreateOrEditInvoiceRequest;
 use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
+use Illuminate\Support\Facades\Storage;
 use NumberFormatter;
 
 class InvoiceController extends Controller
@@ -63,9 +63,11 @@ class InvoiceController extends Controller
             InvoiceItems::create($item);
         }
 
-        // self::created(function ($model) {
+        // Generate QR image
+
+
+        // Generate PDF
         $this->make_invoice('EFC00' . $invoice->invoice_number);
-        // });
 
         return response()->json(['success' => true]);
     }
@@ -128,6 +130,16 @@ class InvoiceController extends Controller
             $fraction_value,
             $currency_fraction
         );
+    }
+
+    public function download($invoice_number)
+    {
+        $file_name = $invoice_number . '.pdf';
+        if (Storage::disk('invoices')->exists($file_name)) {
+            // $file = Storage::disk('invoices')->get($file_name);
+            // $url = Storage::url($file_name);
+            return Storage::disk('invoices')->download($file_name);
+        } else abort(404);
     }
 
     public function make_invoice($invoice_number)

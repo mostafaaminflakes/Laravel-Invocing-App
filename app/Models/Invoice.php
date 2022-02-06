@@ -34,6 +34,6 @@ class Invoice extends Model
 
     public function getTotalAmountAfterVatAttribute()
     {
-        return round($this->getTotalAmountBeforeVatAttribute() + $this->getVatAttribute());
+        return $this->getTotalAmountBeforeVatAttribute() + $this->getVatAttribute();
     }
 }

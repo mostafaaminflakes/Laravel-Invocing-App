@@ -136,8 +136,18 @@
                     <tr>
                         <td class="col-6" rowspan="3">
                             <div>
+                                <p class="fw-bold">{{ __('Total amount after VAT in words') }}</p>
+                                <p>
+                                    @php echo App\Http\Controllers\InvoiceController::get_amount_in_words($invoice->total_amount_after_vat) @endphp
+                                </p>
+                            </div>
+                            <div>
                                 <p class="fw-bold">{{ __('Notes') }}</p>
                                 <p>{{ ! empty($invoice->notes) ? $invoice->notes : '--' }}</p>
+                            </div>
+                            <div>
+                                <p class="fw-bold">مؤسسة العمارة والفن للمقاولات</p>
+                                <p>بنك البلاد - آيبان: SA4810000000484424000107</p>
                             </div>
                         </td>
                         <td class="text-start ps-4 fw-bold border-bottom col-2">
@@ -161,10 +171,10 @@
                         <td class="border-bottom">{{ $invoice->total_amount_after_vat }} {{ __('SAR') }}</td>
                     </tr>
                 </table>
-                <div class="text-center mt-5 border-top">
+                <!-- <div class="text-center mt-5 border-top">
                     <div class="mt-3 h6">مؤسسة العمارة والفن للمقاولات</div>
                     <div class="h6">بنك البلاد - آيبان: SA4810000000484424000107</div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
