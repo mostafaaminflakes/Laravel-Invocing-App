@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "laraveldaily/laravel-invoices": "^2.2",
+        "overtrue/laravel-lang": "^5.0",
         "salla/zatca": "^2.0"
     },
     "require-dev": {
