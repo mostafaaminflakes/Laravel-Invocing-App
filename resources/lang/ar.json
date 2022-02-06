@@ -17,7 +17,7 @@
     "New Invoice": "فاتورة جديدة",
     "Client Information": "بيانات العميل",
     "Name": "الاسم",
-    "VAT Number": "رقم ضريبة القيمة المضافة",
+    "VAT Number": "الرقم الضريبي",
     "VAT number": "رقم ضريبة القيمة المضافة",
     "Project Name": "اسم المشروع",
     "Project Number": "رقم المشروع",
@@ -54,7 +54,9 @@
     "Total Amount After VAT": "الإجمالي بعد الضريبة",
     "Net Amount": "المجموع",
     "INVOICE DETAILS": "تفاصيل الفاتورة",
-    "CR Number": "رقم السجل التجاري",
+    "CR Number": "السجل التجاري",
     "Seller Information": "بيانات البائع",
-    "Simplified Tax Invoice": "فاتورة ضريبية مبسطة"
+    "Simplified Tax Invoice": "فاتورة ضريبية مبسطة",
+    "Total amount after VAT in words": "الإجمالي بعد الضريبة بالحروف",
+    "Bank data": "بيانات البنك"
 }

@@ -21,7 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->string('client_vat_number');
             $table->string('project_name');
             $table->string('project_number');
-            $table->text('notes')->default(null);
+            $table->text('notes');
             $table->timestamps();
         });
     }

@@ -30,7 +30,7 @@ return [
     'total_amount'           => 'Total amount',
     'pay_until'              => 'Please pay until',
     'amount_in_words'        => 'Amount in words',
-    'amount_in_words_format' => '%s %s and %s %s',
+    'amount_in_words_format' => '%s %s و %s %s',
     'notes'                  => 'Notes',
     'shipping'               => 'Shipping',
     'paid'                   => 'Paid',

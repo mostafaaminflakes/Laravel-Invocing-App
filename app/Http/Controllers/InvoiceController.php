@@ -7,26 +7,28 @@ use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Traits\CurrencyFormatter;
+use LaravelDaily\Invoices\Traits\SavesFiles;
 use App\Classes\PDFInvoiceOverride;
 use App\Http\Requests\CreateOrEditInvoiceRequest;
 use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
+use NumberFormatter;
 
 class InvoiceController extends Controller
 {
     // Overriding trait function
-    use CurrencyFormatter {
-        getAmountInWords as protected getAmountInWordsWithLocale;
-    }
+    // use CurrencyFormatter;
+    // use CurrencyFormatter {
+    //     getAmountInWords as protected getAmountInWordsWithLocale;
+    //     //currency_code as protected currency_code1;
+    // }
 
     public function getAmountInWords($amount, $locale = 'ar_SA')
     {
+        // dd($this->currency_code);
         return $this->getAmountInWordsWithLocale($amount, $locale);
+        return $this;
     }
-
-    // private $invoice_number;
-    // public $invoice;
-    // public $invoice_items;
 
     /**
      * Create a new controller instance.
@@ -38,11 +40,6 @@ class InvoiceController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $invoices_mini = InvoiceModel::select('id', 'invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->paginate(10);
@@ -66,13 +63,18 @@ class InvoiceController extends Controller
             InvoiceItems::create($item);
         }
 
+        // self::created(function ($model) {
+        $this->make_invoice('EFC00' . $invoice->invoice_number);
+        // });
+
         return response()->json(['success' => true]);
     }
 
-    public function invoice_data()
+    public function invoice_data($invoice_number)
     {
-        $id = substr('EFC00985113', 5);
-        $invoice = InvoiceModel::where('invoice_number', $id)->first();
+        // $id = substr('EFC00985113', 5);
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::where('invoice_number', $id)->firstOrFail();
         $invoice_items = $invoice->items()->get();
         // dd($this->invoice_items);
         return ['invoice' => $invoice, 'invoice_items' => $invoice_items];
@@ -81,7 +83,7 @@ class InvoiceController extends Controller
     public function details($invoice_number)
     {
         $id = substr($invoice_number, 5);
-        $invoice = InvoiceModel::where('invoice_number', $id)->first();
+        $invoice = InvoiceModel::where('invoice_number', $id)->firstOrFail();
         $invoice_items = $invoice->items()->get();
         // $this->invoice_number = $id;
         // $this->invoice = $invoice;
@@ -91,15 +93,45 @@ class InvoiceController extends Controller
         return view('details', compact('invoice', 'invoice_items')); //->with('invoice' => $invoice);
     }
 
-    public function MakeInvoice1()
+    public static function get_amount_in_words($total_amount_after_vat)
     {
-        return 'aaa';
+        // return (new self)->getAmountInWords($total_amount_after_vat, 'ar_SA');
+        return (new self)->amount_in_words($total_amount_after_vat, 'ar_SA');
+        // return (new self)->getAmountInWords($total_amount_after_vat, 'ar_SA');
+        // return (new self)->getAmountInWordsWithLocale($total_amount_after_vat, 'ar_SA');
+    }
+
+    public function amount_in_words(float $amount, ?string $locale = null)
+    {
+        $decimals = '2';
+        $currency_code = 'ريال سعودي';
+        $currency_fraction = 'هللة';
+        $amount    = number_format($amount, $decimals, '.', '');
+        $formatter = new NumberFormatter($locale ?? App::getLocale(), NumberFormatter::SPELLOUT);
+        //echo $formatter->getPattern();
+
+        $value = explode('.', $amount);
+
+        $integer_value  = (int) $value[0] !== 0 ? $formatter->format($value[0]) : 0;
+        $fraction_value = isset($value[1]) ? $formatter->format($value[1]) : 0;
+
+        if ($value[1] == 0) {
+            //if ($decimals <= 0) {
+            return sprintf('%s %s', ucfirst($integer_value), strtoupper($currency_code));
+            // }
+        }
+
+        return sprintf(
+            trans('invoices::invoice.amount_in_words_format'),
+            ucfirst($integer_value),
+            strtoupper($currency_code),
+            $fraction_value,
+            $currency_fraction
+        );
     }
 
     public function make_invoice($invoice_number)
     {
-        //$this->invoice_data($invoice_number);
-
         $client = new Party([
             'name'          => 'Roosevelt Lloyd',
             'phone'         => '(520) 318-9486',
@@ -153,36 +185,39 @@ class InvoiceController extends Controller
         $notes = implode("<br>", $notes);
 
         $invoice = PDFInvoiceOverride::make('فاتورة')
-            ->series('BIG')
+            // $invoice = Invoice::make('فاتورة')
+            ->withInvoiceNumber($invoice_number)
+            // ->series('BIG')
             // ability to include translated invoice status
             // in case it was paid
-            ->status(__('invoices::invoice.paid'))
-            ->sequence(667)
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            // ->status(__('invoices::invoice.paid'))
+            // ->sequence(667)
+            // ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->seller($client)
             ->buyer($customer)
-            ->date(now()->subWeeks(3))
-            ->dateFormat('m/d/Y')
-            ->payUntilDays(14)
-            ->currencySymbol('SAR ')
-            ->currencyCode('ريال سعودي')
-            ->currencyFraction('هللة')
-            ->currencyFormat('{SYMBOL}{VALUE}')
-            ->currencyThousandsSeparator(',')
-            ->currencyDecimalPoint('.')
-            ->filename($client->name . ' ' . $customer->name)
+            // ->date(now()->subWeeks(3))
+            // ->dateFormat('m/d/Y')
+            // ->payUntilDays(14)
+            // ->currencySymbol('SAR ')
+            // ->currencyCode('ريال سعودي')
+            // ->currencyFraction('هللة')
+            // ->currencyFormat('{SYMBOL}{VALUE}')
+            // ->currencyThousandsSeparator(',')
+            // ->currencyDecimalPoint('.')
+            ->filename($invoice_number)
             ->addItems($items)
-            ->notes($notes)
-            ->logo(public_path('vendor/invoices/sample-logo.png'))
-            ->template('details1')
+            // ->notes($notes)
+            // ->logo(public_path('vendor/invoices/sample-logo.png'))
+            // ->template('details_new')
             // You can additionally save generated invoice to configured disk
-            ->save('public');
+            ->save_file('invoices');
+        // ->url();
 
-        $link = $invoice->url();
+        //$link = $invoice->url();
         // Then send email to party with link
 
         // And return invoice itself to browser or have a different view
-        return $invoice->stream();
+        //return $invoice->stream();
     }
 
     /**

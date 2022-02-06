@@ -12880,6 +12880,7 @@ readers do not read off random characters that represent icons */
             position: fixed;
             bottom: 0;
             width: 100%;
+            border: 1px solid red;
             margin: 16cm 0 0 -9cm
         }
     </style>
@@ -12910,13 +12911,13 @@ readers do not read off random characters that represent icons */
                             <table>
                                 <tr>
                                     <td style="font-weight:bold;">{{ __('Invoice Number') }} - Invoice Number:</td>
-                                    <td>EFC00{{ $invoice->invoice_number }}</td>
+                                    <td>EFC00{{ $invoice->getSerialNumber() }}</td>
                                 </tr>
                             </table>
                             <table>
                                 <tr>
                                     <td style="font-weight:bold;">{{ __('Date') }} - Date:</td>
-                                    <td>{{ $invoice->created_at }}</td>
+                                    <td>{{ $invoice->getDate() }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -13016,16 +13017,12 @@ readers do not read off random characters that represent icons */
                                 </tr>
                                 <tr class="totals-tr">
                                     <td rowspan="3" colspan="3">
-                                        <p style="font-weight:bold;">{{ __('Total amount after VAT in words') }}</p>
-                                        <p>
-                                            @php echo App\Http\Controllers\InvoiceController::get_amount_in_words($invoice->total_amount_after_vat) @endphp
-                                        </p>
-                                        <p>&nbsp;</p>
                                         <p style="font-weight:bold;">{{ __('Notes') }}</p>
                                         <p>{{ ! empty($invoice->notes) ? $invoice->notes : '--' }}</p>
-                                        <p>&nbsp;</p>
-                                        <p style="font-weight:bold;">مؤسسة العمارة والفن للمقاولات</p>
-                                        <p>بنك البلاد - آيبان: SA4810000000484424000107</p>
+                                        <p>
+                                            <!-- {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }} -->
+                                            {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getAmountInWords($invoice->total_amount, 'ar') }}
+                                        </p>
                                     </td>
                                     <td class="text-start ps-4 fw-bold totals-border-bottom" colspan="2">
                                         <p class="m-0 pb-1 left-space">{{ __('Total Amount Before VAT') }}</p>
@@ -13050,10 +13047,10 @@ readers do not read off random characters that represent icons */
                                     <td class="totals-border-bottom">{{ $invoice->total_amount_after_vat }} {{ __('SAR') }}</td>
                                 </tr>
                             </table>
-                            <!-- <div class="text-center mt-5 footer-fixed">
+                            <div class="text-center mt-5 footer-fixed">
                                 <div class="mt-3 h6">مؤسسة العمارة والفن للمقاولات</div>
                                 <div class="h6">بنك البلاد - آيبان: SA4810000000484424000107</div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>

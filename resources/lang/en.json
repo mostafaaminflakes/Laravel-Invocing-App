@@ -52,5 +52,7 @@
     "INVOICE DETAILS": "INVOICE DETAILS",
     "CR Number": "CR Number",
     "Seller Information": "Seller Information",
-    "Simplified Tax Invoice": "Simplified Tax Invoice"
+    "Simplified Tax Invoice": "Simplified Tax Invoice",
+    "Total amount after VAT in words": "Total amount after VAT in words",
+    "Bank data": "Bank data"
 }

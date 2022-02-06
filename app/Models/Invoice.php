@@ -24,12 +24,12 @@ class Invoice extends Model
         foreach ($this->items as $key => $item) {
             $total_before_vat += $item->unit_price * $item->quantity;
         }
-        return round($total_before_vat);
+        return $total_before_vat;
     }
 
     public function getVatAttribute()
     {
-        return round($this->getTotalAmountBeforeVatAttribute() * 0.15);
+        return $this->getTotalAmountBeforeVatAttribute() * 0.15;
     }
 
     public function getTotalAmountAfterVatAttribute()

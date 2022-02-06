@@ -34,6 +34,7 @@ class CreateOrEditInvoiceRequest extends FormRequest
             'invoice_items.*.completion' => 'required|numeric',
             'invoice_items.*.unit_price' => 'required|numeric',
             'invoice_items.*.quantity' => 'required|integer',
+            'notes' => 'nullable',
         ];
     }
 
