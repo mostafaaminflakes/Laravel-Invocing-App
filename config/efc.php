@@ -2,7 +2,7 @@
 
 return [
     // General Settings
-    'default_language' => 'ar',
+    // 'default_language' => 'ar',
     'vat' => '15',
     'allow_edit' => false,
     'allow_delete' => false,
@@ -45,5 +45,5 @@ return [
     'serial' => 'EFC00',
 
     // Controller Specific
-    'next_id' => 0
+    'next_id' => 1
 ];

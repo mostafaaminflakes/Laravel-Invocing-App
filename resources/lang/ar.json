@@ -83,5 +83,7 @@
     "Edit Function":"إمكانية التعديل",
     "Enable Edit Button":"تفعيل زر التعديل",
     "Delete Function":"إمكانية الحذف",
-    "Enable Delete Button":"تفعيل زر الحذف"
+    "Enable Delete Button":"تفعيل زر الحذف",
+    "Settings saved successfully.":"تم حفظ الإعدادات بنجاح.",
+    "Serial number is required.":"الرقم التسلسلي مطلوب."
 }

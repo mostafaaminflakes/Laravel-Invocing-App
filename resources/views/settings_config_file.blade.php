@@ -86,10 +86,7 @@
                                         <label for="vat" class="col-sm-2 col-form-label">{{ __('VAT') }}</label>
                                         <div class="col-5">
                                             <div class="input-group">
-                                                @php
-                                                var_dump($settings);
-                                                @endphp
-                                                <input type="text" name="vat" id="vat" class="form-control" value="{{ (old('vat') ? old('vat') : $settings->get('sfc_vat') ) }}" placeholder="{{ __('VAT') }}">
+                                                <input type="text" name="vat" id="vat" class="form-control" value="{{ (old('vat') ? old('vat') : config('efc.vat') ) }}" placeholder="{{ __('VAT') }}">
                                                 <div><span class="input-group-text">%</span></div>
                                             </div>
                                         </div>

@@ -76,5 +76,7 @@
     "Edit Function":"Edit Function",
     "Enable Edit Button":"Enable Edit Button",
     "Delete Function":"Delete Function",
-    "Enable Delete Button":"Enable Delete Button"
+    "Enable Delete Button":"Enable Delete Button",
+    "Settings saved successfully.":"Settings saved successfully.",
+    "Serial number is required.":"Serial number is required."
 }
