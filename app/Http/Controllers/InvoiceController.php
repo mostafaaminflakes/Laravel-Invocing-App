@@ -57,9 +57,7 @@ class InvoiceController extends Controller
 
     public function settings()
     {
-        $settings = Valuestore::make(storage_path('app/efc_settings.json'))->allStartingWith('sfc');
-        // dd(gettype(json_encode((object)$settings->allStartingWith('sfc'))));
-        // return view('settings', ['settings' => json_encode($settings->allStartingWith('sfc'))]);
+        $settings = Valuestore::make(storage_path('app/efc_settings.json'));
         return view('settings', ['settings' =>  $settings]);
     }
 
