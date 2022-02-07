@@ -61,5 +61,27 @@
     "Seller Information": "بيانات البائع",
     "Simplified Tax Invoice": "فاتورة ضريبية مبسطة",
     "Total amount after VAT in words": "الإجمالي بعد الضريبة بالحروف",
-    "Bank data": "بيانات البنك"
+    "Bank data": "بيانات البنك",
+
+    "SETTINGS":"الإعدادات",
+    "Account Settings":"إعدادات الحساب",
+    "Change Password":"تغيير كلمة السر",
+    "General Settings":"إعدادات عامة",
+    "Bank Settings":"إعدادات البنك",
+    "Invoice Settings":"إعدادات الفاتورة ورمز الاستجابة السريعة - كيو آر",
+    "Default Language":"اللغة الافتراضية",
+    "English":"الإنجليزية",
+    "Arabic":"العربية",
+    "Search In":"البحث في",
+    "Client VAT Number":"الرقم الضريبي للعميل",
+    "Bank Name":"اسم البنك",
+    "IBAN":"الآيبان",
+    "Seller Name":"اسم البائع",
+    "Seller VAT":"الرقم الضريبي للبائع",
+    "Serial Number":"الرقم التسلسلي",
+    "Starting series for the invoice number":"سلسلة البداية لرقم الفاتورة",
+    "Edit Function":"إمكانية التعديل",
+    "Enable Edit Button":"تفعيل زر التعديل",
+    "Delete Function":"إمكانية الحذف",
+    "Enable Delete Button":"تفعيل زر الحذف"
 }

@@ -13,6 +13,7 @@ use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\QRController;
+use Illuminate\Support\Facades\Config;
 use NumberFormatter;
 
 class InvoiceController extends Controller
@@ -51,6 +52,16 @@ class InvoiceController extends Controller
         return view('create');
     }
 
+    public function settings()
+    {
+        return view('settings');
+    }
+
+    public function save_settings()
+    {
+        // return view('settings');
+    }
+
     public function store(CreateOrEditInvoiceRequest $request)
     {
         $data = $request->all();
@@ -67,7 +78,7 @@ class InvoiceController extends Controller
         (new QRController)->generate($invoice->zatca_data, $invoice->invoice_number);
 
         // Generate PDF
-        $this->make_invoice('EFC00' . $invoice->invoice_number);
+        $this->make_invoice(Config::get('efc.serial') . $invoice->invoice_number);
 
         return response()->json(['success' => true]);
     }

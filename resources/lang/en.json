@@ -54,5 +54,27 @@
     "Seller Information": "Seller Information",
     "Simplified Tax Invoice": "Simplified Tax Invoice",
     "Total amount after VAT in words": "Total amount after VAT in words",
-    "Bank data": "Bank data"
+    "Bank data": "Bank data",
+
+    "SETTINGS":"SETTINGS",
+    "Account Settings":"Account Settings",
+    "Change Password":"Change Password",
+    "General Settings":"General Settings",
+    "Bank Settings":"Bank Settings",
+    "Invoice Settings":"Invoice Settings and QR",
+    "Default Language":"Default Language",
+    "English":"English",
+    "Arabic":"Arabic",
+    "Search In":"Search In",
+    "Client VAT Number":"Client VAT Number",
+    "Bank Name":"Bank Name",
+    "IBAN":"IBAN",
+    "Seller Name":"Seller Name",
+    "Seller VAT":"Seller VAT",
+    "Serial Number":"Serial Number",
+    "Starting series for the invoice number":"Starting series for the invoice number",
+    "Edit Function":"Edit Function",
+    "Enable Edit Button":"Enable Edit Button",
+    "Delete Function":"Delete Function",
+    "Enable Delete Button":"Enable Delete Button"
 }

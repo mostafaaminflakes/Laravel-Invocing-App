@@ -20,7 +20,7 @@
                     <div class="table-responsive mb-3">
                         <table class="table table-striped table-hover align-middle" id="dynamicTable">
                             <!-- table-sm -->
-                            <thead class="table-secondary">
+                            <thead class="table-primary">
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('Invoice Number') }}</th>
@@ -28,18 +28,30 @@
                                     <th class="col-sm-3">{{ __('Project Name') }}</th>
                                     <th>{{ __('Date') }}</th>
                                     <th>&nbsp;</th>
+                                    @if( config('efc.allow_edit') )
+                                    <th>&nbsp;</th>
+                                    @endif
+                                    @if( config('efc.allow_delete') )
+                                    <th>&nbsp;</th>
+                                    @endif
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ( $invoices_mini as $key => $invoice_mini )
-                                <tr>
+                                <tr class="h6">
                                     <td>{{ $invoices_mini->firstItem() + $key }}</td>
                                     <td>EFC00{{ $invoice_mini->invoice_number }}</td>
                                     <td>{{ $invoice_mini->client_name }}</td>
                                     <td>{{ $invoice_mini->project_name }}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
+                                    @if( config('efc.allow_edit') )
+                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Edit') }}</a></td>
+                                    @endif
+                                    @if( config('efc.allow_delete') )
+                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-danger btn-sm">{{ __('Delete') }}</a></td>
+                                    @endif
                                     <td><a href="{{ route('download-invoice', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-success btn-sm">{{ __('Export') }}</a></td>
                                 </tr>
                                 @endforeach

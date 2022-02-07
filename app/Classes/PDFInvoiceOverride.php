@@ -5,6 +5,7 @@ namespace App\Classes;
 error_reporting(0);
 
 use \App\Http\Controllers\InvoiceController;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Traits\SavesFiles;
@@ -47,7 +48,7 @@ class PDFInvoiceOverride extends Invoice
         $output = $this->pdf->output();
         //Storage::disk('invoices')->put('EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
 
-        return Storage::disk('invoices')->put('EFC00' . $invoice_data->invoice->invoice_number . '.pdf', $output);
+        return Storage::disk('invoices')->put(Config::get('efc.serial') . $invoice_data->invoice->invoice_number . '.pdf', $output);
     }
 
     public function withInvoiceNumber($invoice_number)
