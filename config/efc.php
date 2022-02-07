@@ -8,27 +8,27 @@ return [
     'allow_delete' => false,
     'search_meta' => [
         'invoice_number' => [
-            'ui_text' => 'Invoice Number',
+            'ui_text' => 'Invoice Number1',
             'enabled' => false,
             'checked' => true
         ],
         'client_name' => [
-            'ui_text' => 'Client Name',
+            'ui_text' => 'Client Name1',
             'enabled' => true,
             'checked' => true
         ],
         'client_vat_number' => [
-            'ui_text' => 'Client VAT Number',
+            'ui_text' => 'Client VAT Number1',
             'enabled' => true,
             'checked' => false
         ],
         'project_name' => [
-            'ui_text' => 'Project Name',
+            'ui_text' => 'Project Name1',
             'enabled' => true,
             'checked' => true
         ],
         'project_number' => [
-            'ui_text' => 'Project Number',
+            'ui_text' => 'Project Number1',
             'enabled' => true,
             'checked' => false
         ]

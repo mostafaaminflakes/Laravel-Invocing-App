@@ -96,10 +96,10 @@
                                     <div class="row">
                                         <div class="col-sm-2">{{ __('Search In') }}</div>
                                         <div class="col-sm-10">
-                                            @foreach(config('efc.search_meta') as $key => $item)
+                                            @foreach($settings->get('sfc_search_meta') as $key => $item)
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="{{ $key }}_chkbx" name="{{ $key }}_chkbx" {{ old( $key . '_chkbx') == 'on' || config('efc.search_meta.'. $key . '.checked') ? 'checked' : '' }} {{ config('efc.search_meta.'. $key . '.enabled') ? '' : 'disabled' }}>
-                                                <label class="form-check-label me-5" for="{{ $key }}_chkbx">{{ __(config('efc.search_meta.'. $key . '.ui_text')) }}</label>
+                                                <input class="form-check-input" type="checkbox" id="{{ $key }}_chkbx" name="{{ $key }}_chkbx" {{ old( $key . '_chkbx') == 'on' || $item['checked'] ? 'checked' : '' }} {{ $item['enabled'] ? '' : 'disabled' }}>
+                                                <label class="form-check-label me-5" for="{{ $key }}_chkbx">{{ __($item['ui_text']) }}</label>
                                             </div>
                                             @endforeach
                                         </div>
@@ -110,7 +110,7 @@
                                         <div class="col-sm-2">{{ __('Edit Function') }}</div>
                                         <div class="col-sm-10">
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="enable_edit_button" name="enable_edit_button" {{ old('enable_edit_button') == 'on' || config('efc.allow_edit') ? 'checked' : ''}}>
+                                                <input class="form-check-input" type="checkbox" id="enable_edit_button" name="enable_edit_button" {{ old('enable_edit_button') == 'on' || $settings->get('sfc_allow_edit') ? 'checked' : ''}}>
                                                 <label class="form-check-label me-5" for="enable_edit_button">{{ __('Enable Edit Button') }}</label>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                                         <div class="col-sm-2">{{ __('Delete Function') }}</div>
                                         <div class="col-sm-10">
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="enable_delete_button" name="enable_delete_button" {{ old('enable_delete_button') == 'on' || config('efc.allow_delete') ? 'checked' : ''}}>
+                                                <input class="form-check-input" type="checkbox" id="enable_delete_button" name="enable_delete_button" {{ old('enable_delete_button') == 'on' || $settings->get('sfc_allow_delete') ? 'checked' : ''}}>
                                                 <label class="form-check-label me-5" for="enable_delete_button">{{ __('Enable Delete Button') }}</label>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
                                     <div class="row">
                                         <label for="bank_name" class="col-sm-2">{{ __('Bank Name') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="bank_name" id="bank_name" class="form-control" value="{{ (old('bank_name') ? old('bank_name') : config('efc.bank_name') ) }}" placeholder="{{ __('Bank Name') }}">
+                                            <input type="text" name="bank_name" id="bank_name" class="form-control" value="{{ (old('bank_name') ? old('bank_name') : $settings->get('sfc_bank_name') ) }}" placeholder="{{ __('Bank Name') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                     <div class="row">
                                         <label for="iban" class="col-sm-2">{{ __('IBAN') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="iban" id="iban" class="form-control" value="{{ (old('iban') ? old('iban') : config('efc.iban') ) }}" placeholder="{{ __('IBAN') }}">
+                                            <input type="text" name="iban" id="iban" class="form-control" value="{{ (old('iban') ? old('iban') : $settings->get('sfc_iban') ) }}" placeholder="{{ __('IBAN') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                                     <div class="row">
                                         <label for="seller_name" class="col-sm-2">{{ __('Seller Name') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="seller_name" id="seller_name" class="form-control" value="{{ (old('seller_name') ? old('seller_name') : config('efc.seller_name') ) }}" placeholder="{{ __('Seller Name') }}">
+                                            <input type="text" name="seller_name" id="seller_name" class="form-control" value="{{ (old('seller_name') ? old('seller_name') : $settings->get('sfc_seller_name') ) }}" placeholder="{{ __('Seller Name') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                     <div class="row">
                                         <label for="seller_vat" class="col-sm-2">{{ __('Seller VAT') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="seller_vat" id="seller_vat" class="form-control" value="{{ (old('seller_vat') ? old('seller_vat') : config('efc.seller_vat') ) }}" placeholder="{{ __('Seller VAT') }}">
+                                            <input type="text" name="seller_vat" id="seller_vat" class="form-control" value="{{ (old('seller_vat') ? old('seller_vat') : $settings->get('sfc_seller_vat') ) }}" placeholder="{{ __('Seller VAT') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                                     <div class="row">
                                         <label for="cr_number" class="col-sm-2">{{ __('CR Number') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="cr_number" id="cr_number" class="form-control" value="{{ (old('cr_number') ? old('cr_number') : config('efc.cr_number') ) }}" placeholder="{{ __('CR Number') }}">
+                                            <input type="text" name="cr_number" id="cr_number" class="form-control" value="{{ (old('cr_number') ? old('cr_number') : $settings->get('sfc_cr_number') ) }}" placeholder="{{ __('CR Number') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                     <div class="row">
                                         <label for="serial_number" class="col-sm-2">{{ __('Serial Number') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{ (old('serial_number') ? old('serial_number') : config('efc.serial') ) }}" placeholder="{{ __('Serial Number') }}" readonly>
+                                            <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{ (old('serial_number') ? old('serial_number') : $settings->get('sfc_serial') ) }}" placeholder="{{ __('Serial Number') }}" readonly>
                                             <span>{{ __('Starting series for the invoice number') }}</span> <span>[<span class="fw-bold">EFC00</span><span>1234</span>]</span>
                                         </div>
                                     </div>
