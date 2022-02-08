@@ -74,6 +74,9 @@ class InvoiceController extends Controller
         $x = '';
         foreach ($values as $key => $value) {
             $x .= $key . '--';
+            if ($settings->has('client_name')) {
+            } elseif ($settings->has('client_name')) {
+            }
         }
         dd($x);
 
