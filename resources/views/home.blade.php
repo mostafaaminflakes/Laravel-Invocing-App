@@ -46,10 +46,10 @@
                                     <td>{{ $invoice_mini->project_name }}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
-                                    @if( config('efc.allow_edit') )
+                                    @if( settings()->get('sfc_allow_edit') )
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Edit') }}</a></td>
                                     @endif
-                                    @if( config('efc.allow_delete') )
+                                    @if( settings()->get('sfc_allow_delete') )
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-danger btn-sm">{{ __('Delete') }}</a></td>
                                     @endif
                                     <td><a href="{{ route('download-invoice', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-success btn-sm">{{ __('Export') }}</a></td>

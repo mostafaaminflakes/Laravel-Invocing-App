@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\QRController;
 use App\Http\Requests\SettingsRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Config;
-use Spatie\Valuestore\Valuestore;
+use App\Classes\Settings;
+// use Illuminate\Support\Facades\Config;
+// use Spatie\Valuestore\Valuestore;
 use NumberFormatter;
 
 class InvoiceController extends Controller
@@ -57,11 +58,10 @@ class InvoiceController extends Controller
 
     public function settings()
     {
-        $settings = Valuestore::make(storage_path('app/efc_settings.json'));
-        return view('settings', ['settings' =>  $settings]);
+        return view('settings');
     }
 
-    public function save_settings(SettingsRequest $request)
+    public function save_settings(SettingsRequest $request, Settings $settings)
     {
         // Update Users table
         $data = $request->only(['name', 'email']);
@@ -69,58 +69,19 @@ class InvoiceController extends Controller
         $user->update($data);
 
         //Update the config file
-        $valuestore = Valuestore::make(storage_path('app/efc_settings.json'));
-        $valuestore->put('sfc_vat', '9');
-        //dd($valuestore->get('search_meta.invoice_number'));
+        $values = $request->except(['_token', '_method']);
+        // dd($request->except(['_token', '_method']));
+        $x = '';
+        foreach ($values as $key => $value) {
+            $x .= $key . '--';
+        }
+        dd($x);
 
-        // Creating the config file
-        // $settings = Valuestore::make(storage_path('app/efc_settings.json'));
-        // $settings->flush();
-        // $settings->put([
-        //     'sfc_vat' => '15',
-        //     'sfc_allow_edit' => false,
-        //     'sfc_allow_delete' => false,
-        //     'sfc_search_meta' => [
-        //         'invoice_number' => [
-        //             'ui_text' => 'Invoice Number',
-        //             'enabled' => false,
-        //             'checked' => true
-        //         ],
-        //         'client_name' => [
-        //             'ui_text' => 'Client Name',
-        //             'enabled' => true,
-        //             'checked' => true
-        //         ],
-        //         'client_vat_number' => [
-        //             'ui_text' => 'Client VAT Number',
-        //             'enabled' => true,
-        //             'checked' => false
-        //         ],
-        //         'project_name' => [
-        //             'ui_text' => 'Project Name',
-        //             'enabled' => true,
-        //             'checked' => true
-        //         ],
-        //         'project_number' => [
-        //             'ui_text' => 'Project Number',
-        //             'enabled' => true,
-        //             'checked' => false
-        //         ]
-        //     ],
-
-        //     // Bank Settings
-        //     'sfc_bank_name' => 'بنك البلاد',
-        //     'sfc_iban' => 'SA6115000437109427260004',
-
-        //     // Invoice Settings
-        //     'sfc_seller_name' => 'العمارة والفن للمقاولات العامة',
-        //     'sfc_seller_vat' => '300821464500003',
-        //     'sfc_cr_number' => '1010154364',
-        //     'sfc_serial' => 'EFC00',
-
-        //     // Controller Specific
-        //     'next_id' => 1
-        // ]);
+        $settings->put('sfc_vat', $request->vat);
+        // dd($settings->get('sfc_search_meta'));
+        // dd($settings->get('client_name'));
+        dd($settings->has('client_name'));
+        // dd($settings['sfc_search_meta']['client_name']['checked']);
 
         return redirect('settings')->with('status', __('Settings saved successfully.'));
     }
