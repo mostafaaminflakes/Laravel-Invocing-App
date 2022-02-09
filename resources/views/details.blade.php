@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-4 text-start">
-                    <img style="width: 100px;" src="{{ asset('/storage/qr_images/') . '/EFC00' . $invoice->invoice_number . '.png' }}" alt="QR Code" />
+                    <img style="width: 100px;" src="{{ asset('/storage/qr_images/') . '/'. settings()->get('sfc_serial') . $invoice->invoice_number . '.png' }}" alt="QR Code" />
                 </div>
             </div>
             <div class="col-md-12 row mb-3">
@@ -40,17 +40,17 @@
                             <table class="table">
                                 <tr>
                                     <td class="col-4">{{ __('Name') }}</td>
-                                    <td class="pe-4">{{ config('efc.seller_name') }}</td>
-                                    <td class="text-start col-4">Name</td>
+                                    <td class="pe-4">{{ settings()->get('sfc_seller_name') }}</td>
+                                    <td class="text-start col-3">Name</td>
                                 </tr>
                                 <tr>
                                     <td>{{ __('VAT Number') }}</td>
-                                    <td class="pe-4">{{ config('efc.seller_vat') }}</td>
+                                    <td class="pe-4">{{ settings()->get('sfc_seller_vat') }}</td>
                                     <td class="text-start">VAT Number</td>
                                 </tr>
                                 <tr>
                                     <td>{{ __('CR Number') }}</td>
-                                    <td class="pe-4">{{ $invoice->project_number }}</td>
+                                    <td class="pe-4">{{ settings()->get('sfc_cr_number') }}</td>
                                     <td class="text-start">CR Number</td>
                                 </tr>
                             </table>
@@ -67,7 +67,7 @@
                                 </tr>
                                 <tr>
                                     <td>{{ __('VAT Number') }}</td>
-                                    <td class="pe-4">{{ $invoice->client_vat_number }}</td>
+                                    <td class="pe-4">{{ ! empty($invoice->client_vat_number) ? $invoice->client_vat_number : '--' }}</td>
                                     <td class="text-start">VAT Number</td>
                                 </tr>
                                 <tr>
@@ -146,8 +146,8 @@
                                 <p>{{ ! empty($invoice->notes) ? $invoice->notes : '--' }}</p>
                             </div>
                             <div>
-                                <p class="fw-bold">مؤسسة العمارة والفن للمقاولات</p>
-                                <p>بنك البلاد - آيبان: {{ config('efc.iban') }}</p>
+                                <p class="fw-bold">{{ settings()->get('sfc_seller_name') }}</p>
+                                <p>{{ settings()->get('sfc_bank_name') }} - آيبان: {{ settings()->get('sfc_iban') }}</p>
                             </div>
                         </td>
                         <td class="text-start ps-4 fw-bold border-bottom col-2">

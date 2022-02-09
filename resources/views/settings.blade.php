@@ -96,12 +96,26 @@
                                     <div class="row">
                                         <div class="col-sm-2">{{ __('Search In') }}</div>
                                         <div class="col-sm-10">
-                                            @foreach(settings()->get('sfc_search_meta') as $key => $item)
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="{{ $key }}_chkbx" name="{{ $key }}_chkbx" {{ old( $key . '_chkbx') == 'on' || $item['checked'] ? 'checked' : '' }} {{ $item['enabled'] ? '' : 'disabled' }}>
-                                                <label class="form-check-label me-5" for="{{ $key }}_chkbx">{{ __($item['ui_text']) }}</label>
+                                                <input class="form-check-input" type="checkbox" id="search_invoice_number" name="search_invoice_number" checked disabled>
+                                                <label class="form-check-label me-5" for="search_invoice_number">{{ __('Invoice Number') }}</label>
                                             </div>
-                                            @endforeach
+                                            <div class="form-check form-switch d-flex">
+                                                <input class="form-check-input" type="checkbox" id="search_meta_client_name" name="search_meta_client_name" {{ old( 'search_meta_client_name') == 'on' || settings()->get('sfc_search_meta_client_name') == 'on' ? 'checked' : '' }}>
+                                                <label class="form-check-label me-5" for="search_meta_client_name">{{ __('Client Name') }}</label>
+                                            </div>
+                                            <div class="form-check form-switch d-flex">
+                                                <input class="form-check-input" type="checkbox" id="search_meta_client_vat_number" name="search_meta_client_vat_number" {{ old( 'search_meta_client_vat_number') == 'on' || settings()->get('sfc_search_meta_client_vat_number') == 'on' ? 'checked' : '' }}>
+                                                <label class="form-check-label me-5" for="search_meta_client_vat_number">{{ __('Client VAT Number') }}</label>
+                                            </div>
+                                            <div class="form-check form-switch d-flex">
+                                                <input class="form-check-input" type="checkbox" id="search_meta_project_name" name="search_meta_project_name" {{ old( 'search_meta_project_name') == 'on' || settings()->get('sfc_search_meta_project_name') == 'on' ? 'checked' : '' }}>
+                                                <label class="form-check-label me-5" for="search_meta_project_name">{{ __('Project Name') }}</label>
+                                            </div>
+                                            <div class="form-check form-switch d-flex">
+                                                <input class="form-check-input" type="checkbox" id="search_meta_project_number" name="search_meta_project_number" {{ old( 'search_meta_project_number') == 'on' || settings()->get('sfc_search_meta_project_number') == 'on' ? 'checked' : '' }}>
+                                                <label class="form-check-label me-5" for="search_meta_project_number">{{ __('Project Number') }}</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,8 +124,8 @@
                                         <div class="col-sm-2">{{ __('Edit Function') }}</div>
                                         <div class="col-sm-10">
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="enable_edit_button" name="enable_edit_button" {{ old('enable_edit_button') == 'on' || settings()->get('sfc_allow_edit') ? 'checked' : ''}}>
-                                                <label class="form-check-label me-5" for="enable_edit_button">{{ __('Enable Edit Button') }}</label>
+                                                <input class="form-check-input" type="checkbox" id="allow_edit" name="allow_edit" {{ old('allow_edit') == 'on' || settings()->get('sfc_allow_edit') == 'on' ? 'checked' : ''}}>
+                                                <label class="form-check-label me-5" for="allow_edit">{{ __('Enable Edit Button') }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -121,8 +135,8 @@
                                         <div class="col-sm-2">{{ __('Delete Function') }}</div>
                                         <div class="col-sm-10">
                                             <div class="form-check form-switch d-flex">
-                                                <input class="form-check-input" type="checkbox" id="enable_delete_button" name="enable_delete_button" {{ old('enable_delete_button') == 'on' || settings()->get('sfc_allow_delete') ? 'checked' : ''}}>
-                                                <label class="form-check-label me-5" for="enable_delete_button">{{ __('Enable Delete Button') }}</label>
+                                                <input class="form-check-input" type="checkbox" id="allow_delete" name="allow_delete" {{ old('allow_delete') == 'on' || settings()->get('sfc_allow_delete') == 'on' ? 'checked' : ''}}>
+                                                <label class="form-check-label me-5" for="allow_delete">{{ __('Enable Delete Button') }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -179,9 +193,9 @@
                                 </div>
                                 <div class="p-2">
                                     <div class="row">
-                                        <label for="serial_number" class="col-sm-2">{{ __('Serial Number') }}</label>
+                                        <label for="serial" class="col-sm-2">{{ __('Serial Number') }}</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="serial_number" id="serial_number" class="form-control" value="{{ (old('serial_number') ? old('serial_number') : settings()->get('sfc_serial') ) }}" placeholder="{{ __('Serial Number') }}" readonly>
+                                            <input type="text" name="serial" id="serial" class="form-control" value="{{ (old('serial') ? old('serial') : settings()->get('sfc_serial') ) }}" placeholder="{{ __('Serial Number') }}" readonly>
                                             <span>{{ __('Starting series for the invoice number') }}</span> <span>[<span class="fw-bold">EFC00</span><span>1234</span>]</span>
                                         </div>
                                     </div>

@@ -7,7 +7,7 @@
             <div class="">
                 <div class="d-flex justify-content-between">
                     <div><strong>{{ __('INVOICES') }}</strong></div>
-                    <div class="fw-light fs-6 mt-1">{{ __('Total invoices') }}: {{ $invoices_mini->total() }}</div>
+                    <div class="fw-light fs-6 mt-1">{{ __('Total invoices searched') }}: {{ $invoices_mini->total() }}</div>
                 </div>
 
                 <div class="card-body">
@@ -82,7 +82,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{{ __('SEARCH') }}">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit"><i class="fas fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
                             </span>
                         </div>
                     </form>

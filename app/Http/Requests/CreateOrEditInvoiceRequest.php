@@ -26,7 +26,7 @@ class CreateOrEditInvoiceRequest extends FormRequest
     {
         return [
             'client_name' => 'required|string|max:255',
-            'client_vat_number' => 'required|digits:15',
+            // 'client_vat_number' => 'required|digits:15',
             'project_name' => 'required|string|max:255',
             'project_number' => 'required|string|max:255',
             'invoice_items.*.service_name' => 'required|string|max:255',
@@ -42,8 +42,8 @@ class CreateOrEditInvoiceRequest extends FormRequest
     {
         return [
             'client_name.required' => __('Client name is required.'),
-            'client_vat_number.required' => __('VAT number is required.'),
-            'client_vat_number.digits' => __('VAT number must be 15 digits.'),
+            // 'client_vat_number.required' => __('VAT number is required.'),
+            // 'client_vat_number.digits' => __('VAT number must be 15 digits.'),
             'project_name.required' => __('Project name is required.'),
             'project_number.required' => __('Project number is required.'),
             'invoice_items.*.service_name.required' => __('Service name is required.'),

@@ -43,7 +43,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav {{(App::isLocale('en') ? 'me-auto' : 'ms-auto')}}">
-                        <strong>{{ __('INVOICES') }}</strong>
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <strong>{{ __('INVOICES') }}</strong>
+                        </a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

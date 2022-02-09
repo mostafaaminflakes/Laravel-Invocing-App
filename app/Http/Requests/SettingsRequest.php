@@ -32,7 +32,7 @@ class SettingsRequest extends FormRequest
             'seller_name' => 'required|string|max:500',
             'seller_vat' => 'required|digits:15',
             'cr_number' => 'required|numeric',
-            'serial_number' => 'required|string',
+            'serial' => 'required|string',
         ];
     }
 
@@ -49,7 +49,7 @@ class SettingsRequest extends FormRequest
             'seller_vat.required' => __('Seller VAT is required.'),
             'seller_vat.digits' => __('VAT number must be 15 digits.'),
             'cr_number.required' => __('CR number is required.'),
-            'serial_number.required' => __('Serial number is required.'),
+            'serial.required' => __('Serial number is required.'),
         ];
     }
 }

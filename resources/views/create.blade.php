@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-sm-4 mb-3">
                                 <div>
-                                    <label for="client_vat_number" class="form-label">{{ __('VAT Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
+                                    <label for="client_vat_number" class="form-label">{{ __('VAT Number') }}</label>
                                     <input type="text" name="client_vat_number" id="client_vat_number" class="form-control" value="{{ (old('client_vat_number') ? old('client_vat_number') : '' ) }}" placeholder="{{ __('VAT number') }}">
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
@@ -148,7 +148,9 @@
                     $("#submit").prop('disabled', false);
                     $('#spinner').removeClass('spinner');
                     if (xhr.status == 200 && data.success == true) {
-                        window.location.href = "{{ route('home') }}";
+                        var url = '{{ route("details", ":id") }}';
+                        url = url.replace(':id', data.invoice);
+                        window.location.href = url;
                     }
                 })
                 .fail(function(data) {
