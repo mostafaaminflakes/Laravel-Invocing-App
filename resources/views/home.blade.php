@@ -80,7 +80,7 @@
                     <form action="{{ route('search') }}" method="post">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ __('SEARCH') }}">
+                            <input type="text" class="form-control" name="search" placeholder="{{ __('SEARCH') }}">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit"><i class="fas fa-search" aria-hidden="true"></i></button>
                             </span>
