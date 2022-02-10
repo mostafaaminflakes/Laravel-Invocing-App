@@ -77,8 +77,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('search') }}" method="post">
-                        @csrf
+                    <form action="{{ route('search') }}" method="get">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="{{ __('SEARCH') }}">
                             <span class="input-group-btn">

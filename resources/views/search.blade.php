@@ -6,8 +6,8 @@
         <div class="col-md-9">
             <div class="">
                 <div class="d-flex justify-content-between">
-                    <div><strong>{{ __('INVOICES') }}</strong></div>
-                    <div class="fw-light fs-6 mt-1">{{ __('Total invoices searched') }}: {{ $invoices_mini->total() }}</div>
+                    <div><strong>{{ __('Search results') }}</strong></div>
+                    <div class="fw-light fs-6 mt-1">{{ __('Total invoices') }}: {{ $invoices_mini->total() }}</div>
                 </div>
 
                 <div class="card-body">
@@ -18,6 +18,7 @@
                     @endif
 
                     <div class="table-responsive mb-3">
+                        @if($invoices_mini->count() > 0)
                         <table class="table table-striped table-hover align-middle" id="dynamicTable">
                             <!-- table-sm -->
                             <thead class="table-primary">
@@ -57,6 +58,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                        <p>{{ __('No results found...') }}</p>
+                        @endempty
                     </div>
 
                     {{-- Pagination --}}
@@ -77,12 +81,11 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('search') }}" method="post">
-                        @csrf
+                    <form action="{{ route('search') }}" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ __('SEARCH') }}">
+                            <input type="text" class="form-control" name="search" placeholder="{{ __('SEARCH') }}">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-search" aria-hidden="true"></i></button>
                             </span>
                         </div>
                     </form>

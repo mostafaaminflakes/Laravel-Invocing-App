@@ -14,7 +14,7 @@ Route::get('create', [InvoiceController::class, 'create'])->name('create');
 Route::post('store', [InvoiceController::class, 'store'])->name('store');
 Route::get('details/{invoice_id}', [InvoiceController::class, 'details'])->name('details');
 // Search
-Route::post('search/{term?}', [SearchController::class, 'search'])->name('search');
+Route::get('search/{term?}', [SearchController::class, 'search'])->name('search');
 // Export
 Route::get('export/{invoice_number}', [ExportController::class, 'download'])->name('download-invoice');
 // Settings

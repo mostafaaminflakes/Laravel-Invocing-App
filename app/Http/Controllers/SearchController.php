@@ -18,14 +18,28 @@ class SearchController extends Controller
         $invoices_mini = InvoiceModel::select('id', 'invoice_number', 'client_name', 'project_name', 'created_at')
             ->orderBy('created_at', 'DESC')
             ->where(function ($query) use ($request, $settings) {
-                dd($settings->all());
-                $query->where('invoice_number', '=', 342354);
-                $query->orWhere('project_name', 'LIKE', '%' . $request->input('search') . '%');
-                $query->orWhere('client_name', 'LIKE', '%عبدالباقي الشافعي%');
-                $query->orWhere('project_number', 'LIKE', '%cvb%');
-            })->get();
+                $keyword = $request->search;
+                $query->where('invoice_number', 'LIKE', '%' . $keyword . '%');
 
-        dd($invoices_mini->all());
+                if ($settings->get('sfc_search_meta_client_name') == 'on') {
+                    $query->orWhere('client_name', 'LIKE', '%' . $keyword . '%');
+                }
+
+                if ($settings->get('sfc_search_meta_client_vat_number') == 'on') {
+                    $query->orWhere('client_vat_number', 'LIKE', '%' . $keyword . '%');
+                }
+
+                if ($settings->get('sfc_search_meta_project_name') == 'on') {
+                    $query->orWhere('project_name', 'LIKE', '%' . $keyword . '%');
+                }
+
+                if ($settings->get('sfc_search_meta_project_number') == 'on') {
+                    $query->orWhere('project_number', 'LIKE', '%' . $keyword . '%');
+                }
+            })->paginate(10)->withQueryString();
+        // ->toSql(); // Get SQL statement
+        // ->getBindings(); // Get search params
+
         return view('search', compact('invoices_mini'));
     }
 }

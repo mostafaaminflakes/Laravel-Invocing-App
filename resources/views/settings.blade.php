@@ -89,6 +89,7 @@
                                                 <input type="text" name="vat" id="vat" class="form-control" value="{{ (old('vat') ? old('vat') : settings()->get('sfc_vat') ) }}" placeholder="{{ __('VAT') }}">
                                                 <div><span class="input-group-text">%</span></div>
                                             </div>
+                                            <div class="fs-6">{{ __('Only new invoices will be affected with VAT change. Old ones will remain as is.') }}</div>
                                         </div>
                                     </div>
                                 </div>
