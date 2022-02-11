@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SettingsRequest;
 use App\Classes\Settings;
+use App\Http\Requests\PasswordRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function load_settings()
     {
         return view('settings');
@@ -33,5 +40,17 @@ class SettingsController extends Controller
         }
 
         return redirect('settings')->with('status', __('Settings saved successfully.'));
+    }
+
+    public function password()
+    {
+        return view('password');
+    }
+
+    public function change_password(PasswordRequest $request)
+    {
+        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+
+        return redirect('password')->with('status', __('Password changed successfully.'));
     }
 }

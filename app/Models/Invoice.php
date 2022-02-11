@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+// use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Config;
 
 class Invoice extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['user_id', 'invoice_number', 'client_name', 'client_vat_number', 'project_name', 'project_number', 'notes'];
 
@@ -48,5 +49,18 @@ class Invoice extends Model
             'total_amount' => $this->getTotalAmountAfterVatAttribute(),
             'vat_amount' => $this->getVatAttribute()
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($invoice) {
+            $invoice->items()->delete();
+        });
+
+        static::restoring(function ($invoice) {
+            $invoice->items()->withTrashed()->restore();
+        });
     }
 }

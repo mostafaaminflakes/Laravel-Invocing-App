@@ -81,5 +81,19 @@
     "Serial number is required.": "Serial number is required.",
     "No results found...": "No results found...",
     "Search results": "Search results",
-    "Only new invoices will be affected with VAT change. Old ones will remain as is.": "Only new invoices will be affected with VAT change. Old ones will remain as is."
+    "Only new invoices will be affected with VAT change. Old ones will remain as is.": "Only new invoices will be affected with VAT change. Old ones will remain as is.",
+
+    "Current Password": "Current Password",
+    "New Password": "New Password",
+    "Confirm New Password": "Confirm New Password",
+    "Current password is required.": "Current password is required.",
+    "New password is required.": "New password is required.",
+    "New password must be at least 6 letters or numbers.": "New password must be at least 6 letters or numbers.",
+    "Confirm new password is required.": "Confirm new password is required.",
+    "New passwords doesn't match.": "New passwords doesn't match.",
+    "Current password is not correct.": "Current password is not correct.",
+    "Password changed successfully.": "Password changed successfully.",
+
+    "Invoice deleted successfully.": "Invoice deleted successfully.",
+    "Are you sure to delete this invoice?": "Are you sure to delete this invoice?"
 }

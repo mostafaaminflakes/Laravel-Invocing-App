@@ -54,7 +54,7 @@
                                 <div class="p-2">
                                     <div class="row">
                                         <div class="col-sm-2">{{ __('Password') }}</div>
-                                        <div class="col-sm-10"><a href="#">{{ __('Change Password') }}</a></div>
+                                        <div class="col-sm-10"><a href="{{ route('password') }}">{{ __('Change Password') }}</a></div>
                                     </div>
                                 </div>
                             </div>

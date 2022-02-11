@@ -75,12 +75,6 @@
                 <div class="card-header">{{ __('SEARCH') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
                     <form action="{{ route('search') }}" method="get">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="{{ __('SEARCH') }}">

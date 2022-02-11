@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class InvoiceItems extends Model
 {
-    use HasFactory;
-
-    //public $table = "invoice_items";
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['invoice_id', 'service_name', 'unit', 'completion', 'unit_price', 'quantity'];
 

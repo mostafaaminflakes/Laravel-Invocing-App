@@ -72,6 +72,15 @@ class InvoiceController extends Controller
         return ['invoice' => $invoice, 'invoice_items' => $invoice_items];
     }
 
+    public function delete($invoice_number)
+    {
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::where('invoice_number', $id)->firstOrFail();
+        $invoice->delete();
+
+        return back()->with('status', __('Invoice deleted successfully.'));
+    }
+
     // public function getAmountInWords($amount, $locale = 'ar_SA')
     // {
     //     return $this->getAmountInWordsWithLocale($amount, $locale);

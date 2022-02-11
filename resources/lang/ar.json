@@ -88,5 +88,18 @@
     "Serial number is required.": "الرقم التسلسلي مطلوب.",
     "No results found...": "لا توجد نتائج...",
     "Search results": "نتائج البحث",
-    "Only new invoices will be affected with VAT change. Old ones will remain as is.": "الفواتير الجديدة فقط هي التي ستتأثر بهذا التغيير. الفواتير القديمة ستظل كما هي."
+    "Only new invoices will be affected with VAT change. Old ones will remain as is.": "الفواتير الجديدة فقط هي التي ستتأثر بهذا التغيير. الفواتير القديمة ستظل كما هي.",
+    "Current Password": "كلمة المرور الحالية",
+    "New Password": "كلمة المرور الجديدة",
+    "Confirm New Password": "تأكيد كلمة المرور الجديدة",
+    "Current password is required.": "كلمة المرور الحالية مطلوبة.",
+    "New password is required.": "كلمة المرور الجديدة مطلوبة.",
+    "New password must be at least 6 letters or numbers.": "كلمة المرور الجديدة يجب أن تكون على الأقل 6 أحرف وأرقام.",
+    "Confirm new password is required.": "تأكيد كلمة المرور الجديدة مطلوبة.",
+    "New passwords doesn't match.": "كلمة المرور الجديدة وتأكيدها غير متطابقين.",
+    "Current password is not correct.": "كلمة المرور الحالية غير صحيحة.",
+    "Password changed successfully.": "تم تغيير كلمة المرور بنجاح.",
+
+    "Invoice deleted successfully.": "تم حذف الفاتورة بنجاح.",
+    "Are you sure to delete this invoice?": "هل أنت متأكد من حذف هذه الفاتورة؟"
 }
