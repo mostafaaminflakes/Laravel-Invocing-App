@@ -7,7 +7,7 @@ use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // Invoices
 Route::get('/', [InvoiceController::class, 'index'])->name('home');
