@@ -5,7 +5,11 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <div><strong>{{ __('INVOICE DETAILS') }}</strong></div>
-            <div class="fw-light fs-6 mt-1"><a href="{{ route('download-invoice', 'EFC00'.$invoice->invoice_number) }}" class="btn btn-success btn-lg">{{ __('Export') }}</a></div>
+            <div class="fw-light fs-6 mt-1">
+                <a href="{{ route('edit', 'EFC00'.$invoice->invoice_number) }}" class="btn btn-warning btn-lg ms-2">{{ __('Edit') }}</a>
+                <!-- <a href="{{ route('delete', 'EFC00'.$invoice->invoice_number) }}" class="btn btn-danger btn-lg ms-2" onclick="return confirm('{{ __('Are you sure to delete this invoice?') }}')">{{ __('Delete') }}</a> -->
+                <a href="{{ route('download-invoice', 'EFC00'.$invoice->invoice_number) }}" class="btn btn-success btn-lg">{{ __('Export') }}</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="col-md-12 row mb-3">

@@ -101,5 +101,10 @@
     "Password changed successfully.": "تم تغيير كلمة المرور بنجاح.",
 
     "Invoice deleted successfully.": "تم حذف الفاتورة بنجاح.",
-    "Are you sure to delete this invoice?": "هل أنت متأكد من حذف هذه الفاتورة؟"
+    "Are you sure to delete this invoice?": "هل أنت متأكد من حذف هذه الفاتورة؟",
+    "Invoice deleted permanently.": "تم حذف الفاتورة نهائيا.",
+    "Permanent Delete": "حذف نهائي",
+    "Invoices Restore and Delete": "الفواتير - حذف واستعادة",
+    "Edit Invoice": "تعديل الفاتورة",
+    "No invoices found...": "لا توجد فواتير..."
 }

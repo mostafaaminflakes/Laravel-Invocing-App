@@ -18,6 +18,7 @@
                     @endif
 
                     <div class="table-responsive mb-3">
+                        @if($invoices_mini->count() > 0)
                         <table class="table table-striped table-hover align-middle" id="dynamicTable">
                             <!-- table-sm -->
                             <thead class="table-primary">
@@ -42,12 +43,12 @@
                                 <tr class="h6">
                                     <td>{{ $invoices_mini->firstItem() + $key }}</td>
                                     <td>EFC00{{ $invoice_mini->invoice_number }}</td>
-                                    <td>{{ $invoice_mini->client_name }}</td>
-                                    <td>{{ $invoice_mini->project_name }}</td>
+                                    <td>{{Str::words($invoice_mini->client_name, '4', '...')}}</td>
+                                    <td>{{Str::words($invoice_mini->project_name, '4', '...')}}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
                                     @if( settings()->get('sfc_allow_edit') == 'on' )
-                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Edit') }}</a></td>
+                                    <td><a href="{{ route('edit', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-warning btn-sm">{{ __('Edit') }}</a></td>
                                     @endif
                                     @if( settings()->get('sfc_allow_delete') == 'on' )
                                     <td><a href="{{ route('delete', 'EFC00'.$invoice_mini->invoice_number) }}" onclick="return confirm('{{ __('Are you sure to delete this invoice?') }}')" class="btn btn-danger btn-sm">{{ __('Delete') }}</a></td>
@@ -57,6 +58,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                        <p>{{ __('No invoices found...') }}</p>
+                        @endempty
                     </div>
 
                     {{-- Pagination --}}

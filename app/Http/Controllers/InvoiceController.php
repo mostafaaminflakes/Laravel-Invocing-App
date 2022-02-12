@@ -56,6 +56,35 @@ class InvoiceController extends Controller
         return response()->json(['success' => true, 'invoice' => $settings->get('sfc_serial') . $invoice->invoice_number]);
     }
 
+    public function edit($invoice_number)
+    {
+        $invoice = $this->invoice_data($invoice_number);
+        return view('edit', $invoice);
+    }
+
+    public function save_edit(CreateOrEditInvoiceRequest $request, Settings $settings)
+    {
+        $invoice_id = $request->i_n;
+
+        $data = $request->all();
+        $invoice = InvoiceModel::where('invoice_number', $invoice_id)->firstOrFail();
+        $invoice->update($data);
+        $invoice->items()->forceDelete();
+
+        foreach ($request->invoice_items as $item) {
+            $item['invoice_id'] = $invoice->id;
+            InvoiceItems::create($item);
+        }
+
+        // Generate QR image
+        (new QRController)->generate($invoice->zatca_data, $invoice->invoice_number);
+
+        // Generate PDF
+        (new ExportController)->save_pdf_invoice($settings->get('sfc_serial') . $invoice->invoice_number);
+
+        return response()->json(['success' => true, 'invoice' => $settings->get('sfc_serial') . $invoice->invoice_number]);
+    }
+
     public function details($invoice_number)
     {
         $invoice = $this->invoice_data($invoice_number);
@@ -79,6 +108,41 @@ class InvoiceController extends Controller
         $invoice->delete();
 
         return back()->with('status', __('Invoice deleted successfully.'));
+    }
+
+    /* Admin */
+    public function admin_restore()
+    {
+        $invoices_mini = InvoiceModel::select('id', 'invoice_number', 'client_name', 'project_name', 'created_at')->orderBy('created_at', 'DESC')->onlyTrashed()->paginate(10);
+        return view('restore', compact('invoices_mini'));
+    }
+
+    public function admin_details($invoice_number)
+    {
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::withTrashed()->where('invoice_number', $id)->firstOrFail();
+        $invoice_items = $invoice->items()->withTrashed()->get();
+
+        return view('details', ['invoice' => $invoice, 'invoice_items' => $invoice_items]);
+    }
+
+    public function admin_restore_invoice($invoice_number)
+    {
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::withTrashed()->where('invoice_number', $id)->firstOrFail();
+        $invoice->restore();
+
+        return back()->with('status', __('Invoice restored successfully.'));
+    }
+
+    public function admin_delete_invoice($invoice_number)
+    {
+        $id = substr($invoice_number, 5);
+        $invoice = InvoiceModel::withTrashed()->where('invoice_number', $id)->firstOrFail();
+        $invoice->forceDelete();
+        $invoice->items()->withTrashed()->forceDelete();
+
+        return back()->with('status', __('Invoice deleted permanently.'));
     }
 
     // public function getAmountInWords($amount, $locale = 'ar_SA')

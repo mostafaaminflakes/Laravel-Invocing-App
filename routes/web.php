@@ -13,8 +13,15 @@ Auth::routes();
 Route::get('/', [InvoiceController::class, 'index'])->name('home');
 Route::get('create', [InvoiceController::class, 'create'])->name('create');
 Route::post('store', [InvoiceController::class, 'store'])->name('store');
+Route::get('edit/{invoice_id}', [InvoiceController::class, 'edit'])->name('edit');
+Route::post('save_edit', [InvoiceController::class, 'save_edit'])->name('save_edit');
 Route::get('details/{invoice_id}', [InvoiceController::class, 'details'])->name('details');
 Route::get('delete/{invoice_id}', [InvoiceController::class, 'delete'])->name('delete');
+// Admin restore, details and permanent delete
+Route::get('admin_restore', [InvoiceController::class, 'admin_restore'])->name('admin_restore');
+Route::get('admin_restore_invoice/{invoice_id}', [InvoiceController::class, 'admin_restore_invoice'])->name('admin_restore_invoice');
+Route::get('admin_details/{invoice_id}', [InvoiceController::class, 'admin_details'])->name('admin_details');
+Route::get('admin_delete_invoice/{invoice_id}', [InvoiceController::class, 'admin_delete_invoice'])->name('admin_delete_invoice');
 // Search
 Route::get('search/{term?}', [SearchController::class, 'search'])->name('search');
 // Export

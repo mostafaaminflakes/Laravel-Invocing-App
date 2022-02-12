@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Config;
 
 class Invoice extends Model
 {
@@ -43,8 +42,8 @@ class Invoice extends Model
     public function getZatcaDataAttribute()
     {
         return [
-            'seller_name' => Config::get('efc.seller_name'),
-            'vat_number' => Config::get('efc.seller_vat'),
+            'seller_name' => settings()->get('sfc_seller_name'),
+            'vat_number' => settings()->get('sfc_seller_vat'),
             'invoice_date' => $this->created_at->format('Y-m-d H:i:s'),
             'total_amount' => $this->getTotalAmountAfterVatAttribute(),
             'vat_amount' => $this->getVatAttribute()

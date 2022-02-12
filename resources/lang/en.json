@@ -95,5 +95,10 @@
     "Password changed successfully.": "Password changed successfully.",
 
     "Invoice deleted successfully.": "Invoice deleted successfully.",
-    "Are you sure to delete this invoice?": "Are you sure to delete this invoice?"
+    "Are you sure to delete this invoice?": "Are you sure to delete this invoice?",
+    "Invoice deleted permanently.": "Invoice deleted permanently.",
+    "Permanent Delete": "Permanent Delete",
+    "Invoices Restore and Delete": "Invoices Restore and Delete",
+    "Edit Invoice": "Edit Invoice",
+    "No invoices found...": "No invoices found..."
 }
