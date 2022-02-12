@@ -39,8 +39,8 @@
                                 <tr class="h6">
                                     <td>{{ $invoices_mini->firstItem() + $key }}</td>
                                     <td>EFC00{{ $invoice_mini->invoice_number }}</td>
-                                    <td>{{ $invoice_mini->client_name }}</td>
-                                    <td>{{ $invoice_mini->project_name }}</td>
+                                    <td>{{Str::words($invoice_mini->client_name, '4', '...')}}</td>
+                                    <td>{{Str::words($invoice_mini->project_name, '4', '...')}}</td>
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('admin_details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
                                     <td><a href="{{ route('admin_restore_invoice', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-warning btn-sm">{{ __('Restore') }}</a></td>
