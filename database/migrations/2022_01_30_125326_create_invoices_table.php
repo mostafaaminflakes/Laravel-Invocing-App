@@ -18,11 +18,12 @@ class CreateInvoicesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->integer('invoice_number');
             $table->string('client_name');
-            $table->string('client_vat_number');
+            $table->string('client_vat_number')->nullable();
             $table->string('project_name');
             $table->string('project_number');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

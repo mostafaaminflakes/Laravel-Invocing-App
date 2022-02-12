@@ -22,6 +22,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->integer('unit_price');
             $table->integer('quantity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
