@@ -48,10 +48,10 @@
                                     <td>{{ $invoice_mini->created_at }}</td>
                                     <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Details') }}</a></td>
                                     @if( settings()->get('sfc_allow_edit') == 'on' )
-                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-primary btn-sm">{{ __('Edit') }}</a></td>
+                                    <td><a href="{{ route('edit', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-warning btn-sm">{{ __('Edit') }}</a></td>
                                     @endif
                                     @if( settings()->get('sfc_allow_delete') == 'on' )
-                                    <td><a href="{{ route('details', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-danger btn-sm">{{ __('Delete') }}</a></td>
+                                    <td><a href="{{ route('delete', 'EFC00'.$invoice_mini->invoice_number) }}" onclick="return confirm('{{ __('Are you sure to delete this invoice?') }}')" class="btn btn-danger btn-sm">{{ __('Delete') }}</a></td>
                                     @endif
                                     <td><a href="{{ route('download-invoice', 'EFC00'.$invoice_mini->invoice_number) }}" class="btn btn-success btn-sm">{{ __('Export') }}</a></td>
                                 </tr>
@@ -90,12 +90,6 @@
                 <div class="card-header">{{ __('TOOLS') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
                     <!-- <div class="input-group">
                         <input type="text" class="form-control" placeholder="{{Str::words('Search by invoice number, client name', '3', '...')}}">
                         <span class="input-group-btn">
