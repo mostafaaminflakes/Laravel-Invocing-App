@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->string('client_name');
             $table->string('client_vat_number')->nullable();
             $table->string('project_name');
-            $table->string('project_number');
+            $table->string('project_number')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

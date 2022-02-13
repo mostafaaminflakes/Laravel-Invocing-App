@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-sm-4 mb-3">
                                 <div>
-                                    <label for="project_number" class="form-label">{{ __('Project Number') }} <span class=" fw-light fs-6 text-danger">*</span></label>
+                                    <label for="project_number" class="form-label">{{ __('Project Number') }}</label>
                                     <input type="text" name="project_number" id="project_number" class="form-control" value="{{ (old('project_number') ? old('project_number') : '' ) }}" placeholder="{{ __('Project Number') }}">
                                 </div>
                                 <div class="text-danger fs-6 err-msg"></div>
