@@ -100,5 +100,6 @@
     "Permanent Delete": "Permanent Delete",
     "Invoices Restore and Delete": "Invoices Restore and Delete",
     "Edit Invoice": "Edit Invoice",
-    "No invoices found...": "No invoices found..."
+    "No invoices found...": "No invoices found...",
+    "Download All Invoices": "Download All Invoices"
 }

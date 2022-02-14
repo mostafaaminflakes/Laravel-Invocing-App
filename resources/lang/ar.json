@@ -106,5 +106,6 @@
     "Permanent Delete": "حذف نهائي",
     "Invoices Restore and Delete": "الفواتير - حذف واستعادة",
     "Edit Invoice": "تعديل الفاتورة",
-    "No invoices found...": "لا توجد فواتير..."
+    "No invoices found...": "لا توجد فواتير...",
+    "Download All Invoices": "تحميل كل الفواتير"
 }

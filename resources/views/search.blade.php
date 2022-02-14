@@ -97,7 +97,10 @@
                         </span>
                     </div> -->
 
-                    <div><a class="btn btn-primary" href="{{ route('create') }}">{{ __('New Invoice') }}</a></div>
+                    <div>
+                        <a class="btn btn-primary ms-2" href="{{ route('create') }}">{{ __('New Invoice') }}</a>
+                        <a class="btn btn-primary" href="{{ route('download_zip') }}">{{ __('Download All Invoices') }}</a>
+                    </div>
 
                 </div>
             </div>
