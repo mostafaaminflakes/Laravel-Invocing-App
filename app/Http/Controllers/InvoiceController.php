@@ -9,6 +9,7 @@ use App\Models\Invoice as InvoiceModel;
 use App\Models\InvoiceItems;
 use App\Http\Controllers\QRController;
 use App\Http\Controllers\ExportController;
+use Illuminate\Support\Facades\Storage;
 use NumberFormatter;
 
 class InvoiceController extends Controller
@@ -142,7 +143,23 @@ class InvoiceController extends Controller
         $invoice->forceDelete();
         $invoice->items()->withTrashed()->forceDelete();
 
+        // Delete PDF file and QR image
+        $this->admin_delete_invoice_files($invoice_number);
+
         return back()->with('status', __('Invoice deleted permanently.'));
+    }
+
+    public function admin_delete_invoice_files($invoice_number): void
+    {
+        $pdf_file = 'invoices/' . $invoice_number . '.pdf';
+        $png_file = 'qr_images/' . $invoice_number . '.png';
+        if (Storage::disk('public')->exists($pdf_file)) {
+            Storage::disk('public')->delete($pdf_file);
+        }
+
+        if (Storage::disk('public')->exists($png_file)) {
+            Storage::disk('public')->delete($png_file);
+        }
     }
 
     // public function getAmountInWords($amount, $locale = 'ar_SA')
