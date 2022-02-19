@@ -17,7 +17,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->id();
             $table->unsignedInteger('invoice_id');
             $table->string('service_name');
-            $table->integer('unit');
+            $table->string('unit');
             $table->integer('completion');
             $table->integer('unit_price');
             $table->integer('quantity');
