@@ -1,5 +1,3 @@
-<p align="center"><br><img src="./public/images/qr_scan_me.png" width="150"></p>
-
 A Laravel application to generate QR Codes required for e-invoicing standard by [ZATCA](https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx) in Saudi Arabia.
 You can use it as a ready-made code template for your projects to support ZATCA QR codes.
 
@@ -32,7 +30,3 @@ $ php artisan serve
 ## Reading the QR Code information
 
 You can read the QR Code information using [E-Invoice QR Reader KSA](https://play.google.com/store/apps/details?id=com.posbankbh.einvoiceqrreader). It's designed to display the QR Code contents of any E-Invoice that is compliant with the Zakat and Tax Authority in Saudi Arabia.
-
-## Contributions
-
-For bug reports or feature requests, please share them with us [here](https://github.com/mostafaaminflakes/ZATCA-QR-Code-Implementation/issues).
