@@ -19,11 +19,13 @@ This application is built using the following libraries:
 To get started, this is all you need to do:
 
 ```bash
-$ git clone https://github.com/mostafaaminflakes/ZATCA-QR-Code-Implementation.git
-$ cd ZATCA-QR-Code-Implementation
+$ git clone https://github.com/mostafaaminflakes/Invoice-Test.git
+$ cd Invoice-Test
 $ composer install
+$ npm install && npm run dev
 $ cp .env.example .env
 $ php artisan key:generate
+$ php artisan migrate 
 $ php artisan serve
 ```
 
