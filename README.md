@@ -1,18 +1,10 @@
-A Laravel application to generate QR Codes required for e-invoicing standard by [ZATCA](https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx) in Saudi Arabia.
-You can use it as a ready-made code template for your projects to support ZATCA QR codes.
-
-This application is built using the following libraries:
-
--   [Salla ZATCA](https://github.com/SallaApp/ZATCA) implementation.
--   [Chillerlan](https://github.com/chillerlan/php-qrcode) QR Code library
--   Barryvdh [DOMPDF Wrapper](https://github.com/barryvdh/laravel-dompdf) for Laravel.
+A Laravel application to generate customer invoices with QR Codes required for the e-invoicing standard by [ZATCA](https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx) in Saudi Arabia.
+You can use it as a ready-made module in your projects to support invoices with ZATCA compliant QR codes.
 
 ## Features
 
--   Download QR code image directly.
--   Save QR code image to server.
--   Generate PDF with QR code image.
--   Add an image in the center of the QR code image.
+-   Create/Edit/Search/Export/Delete invoices.
+-   Application Settings [Account, VAT amount, search locations, and QR code data].
 
 ## Usage
 
