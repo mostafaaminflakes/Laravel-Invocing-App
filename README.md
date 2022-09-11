@@ -17,6 +17,7 @@ This application is built using the following libraries:
 ## Usage
 
 To get started, this is all you need to do:
+
 Note: Create an empty database first. Then use its name in the .env file.
 
 ```bash
@@ -30,13 +31,6 @@ $ php artisan key:generate
 $ php artisan migrate 
 $ php artisan serve
 ```
-
-# Note
-
-### Note
-
-
-
 
 ## Reading the QR Code information
 
