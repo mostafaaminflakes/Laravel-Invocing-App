@@ -6,6 +6,8 @@ You can use it as a ready-made module in your projects to support invoices with 
 ## Features
 
 -   Create/Edit/Search/Export/Delete invoices.
+-   PDF support.
+-   QR code support.
 -   Application Settings [Account, VAT amount, search locations, and QR code data].
 
 ## Usage
