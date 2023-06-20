@@ -17,8 +17,8 @@ Note: Create an empty database first. Then use its credentials in the .env file.
 To get started, this is all you need to do:
 
 ```bash
-$ git clone https://github.com/mostafaaminflakes/Invoice-Test.git
-$ cd Invoice-Test
+$ git clone https://github.com/mostafaaminflakes/Laravel-Invocing-App.git
+$ cd Laravel-Invocing-App
 $ composer install
 $ npm install
 $ npm run dev
